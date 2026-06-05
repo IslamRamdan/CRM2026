@@ -37,7 +37,12 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+    protected $appends = ['company_name'];
 
+    public function getCompanyNameAttribute()
+    {
+        return $this->company?->name;
+    }
     /**
      * Get the attributes that should be cast.
      *
@@ -52,6 +57,6 @@ class User extends Authenticatable
     }
     public function company()
     {
-        return $this->belongsTo(Company::class);
+        return $this->belongsTo(Company::class, 'company_id');
     }
 }

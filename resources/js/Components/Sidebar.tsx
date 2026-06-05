@@ -11,8 +11,7 @@ export default function Sidebar({ isCollapsed = false }: SidebarProps) {
         name: "fjhfjhf",
         email: "erfa20045@gmail.com",
     };
-    console.log(props);
-    const company = props.auth?.company || {
+    const company = props.auth?.user?.company || {
         name: "منصة", // قيمة افتراضية في حال لم تكن الشركة مسجلة بعد
         email: "erfa20045@gmail.com",
     };
@@ -85,7 +84,7 @@ export default function Sidebar({ isCollapsed = false }: SidebarProps) {
                     {/* تفاصيل المنشأة والوكالة */}
                     <div className="text-left">
                         <p className="text-[10px] text-zinc-400 font-bold tracking-wide">
-                            الوكالة
+                            الشركة
                         </p>
                         <p className="text-base font-black text-zinc-800">
                             {company.name}
