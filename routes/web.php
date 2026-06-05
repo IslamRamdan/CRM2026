@@ -29,8 +29,8 @@ Route::middleware('auth')->group(function () {
 
 // تسجيل دخول الشركة والاونر
 Route::get('/register', [CompanyRegisterController::class, 'create']);
-Route::post('/register-company', [CompanyRegisterController::class, 'store']);
-
+Route::post('/company/register', [CompanyRegisterController::class, 'store'])
+    ->name('company.register');
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/employees', [UserController::class, 'index']);
