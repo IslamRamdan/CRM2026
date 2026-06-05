@@ -35,6 +35,24 @@ class CompanyRegisterController extends Controller
             'email'        => 'required|email|unique:users,email',
             'phone'        => 'nullable|string|max:20',
             'password'     => 'required|string|min:6|confirmed',
+        ], [
+            'company_name.required' => 'حقل اسم الشركة مطلوب ولا يمكن تركه فارغاً.',
+            'company_name.max'      => 'يجب ألا يتجاوز اسم الشركة 255 حرفاً.',
+
+            'city.max'              => 'يجب ألا يتجاوز اسم المدينة 255 حرفاً.',
+
+            'name.required'         => 'حقل اسم المسؤول مطلوب.',
+            'name.max'              => 'يجب ألا يتجاوز اسم المسؤول 255 حرفاً.',
+
+            'email.required'        => 'حقل البريد الإلكتروني مطلوب للاتصال.',
+            'email.email'           => 'الرجاء إدخال بريد إلكتروني بصيغة صحيحة.',
+            'email.unique'          => 'هذا البريد الإلكتروني مسجل لدينا بالفعل.',
+
+            'phone.max'             => 'يجب ألا يتجاوز رقم الجوال 20 رمزاً.',
+
+            'password.required'     => 'حقل كلمة المرور مطلوب لحماية حسابك.',
+            'password.min'          => 'يجب ألا تقل كلمة المرور عن 6 أحرف أو أرقام.',
+            'password.confirmed'    => 'كلمة المرور وتأكيد كلمة المرور غير متطابقين.',
         ]);
 
         DB::beginTransaction();
