@@ -53,10 +53,10 @@ export default function Index({ sponsors = [] }: Props) {
                 {/* الهيدر العلوي */}
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
                     <div>
-                        <h1 className="text-2xl font-black text-zinc-900">
+                        <h1 className="text-2xl font-black text-zinc-900 dark:text-zinc-100">
                             إدارة الكفلاء
                         </h1>
-                        <p className="text-sm text-zinc-500 mt-1">
+                        <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">
                             إضافة، تعديل، ومتابعة سجلات الكفلاء والجهات الداعمة
                             للتأشيرات
                         </p>
@@ -64,7 +64,7 @@ export default function Index({ sponsors = [] }: Props) {
 
                     <button
                         onClick={openCreateModal}
-                        className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-sm transition-all shadow-sm shadow-indigo-100 cursor-pointer"
+                        className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold text-sm transition-all shadow-sm shadow-indigo-100 cursor-pointer"
                     >
                         <svg
                             className="w-5 h-5"
@@ -84,7 +84,7 @@ export default function Index({ sponsors = [] }: Props) {
                 </div>
 
                 {/* شريط البحث وتصفية البيانات */}
-                <div className="bg-white p-4 rounded-2xl border border-zinc-100 shadow-xs mb-6">
+                <div className="bg-white dark:bg-zinc-900 p-4 rounded-2xl border border-zinc-100 dark:border-zinc-800 shadow-xs mb-6">
                     <div className="relative max-w-md">
                         <span className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-zinc-400">
                             <svg
@@ -104,7 +104,7 @@ export default function Index({ sponsors = [] }: Props) {
                         <input
                             type="text"
                             placeholder="بحث باسم الكفيل أو رقم الهوية/السجل..."
-                            className="w-full pr-10 pl-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-xl text-sm focus:outline-hidden focus:ring-2 focus:ring-indigo-100 focus:border-indigo-500 transition-all"
+                            className="w-full pr-10 pl-4 py-2.5 bg-zinc-50 dark:bg-zinc-800 dark:text-zinc-100 border border-zinc-200 dark:border-zinc-700 rounded-xl text-sm focus:outline-hidden focus:ring-2 focus:ring-emerald-100 focus:border-emerald-500 transition-all"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
@@ -112,24 +112,24 @@ export default function Index({ sponsors = [] }: Props) {
                 </div>
 
                 {/* جدول البيانات */}
-                <div className="bg-white rounded-2xl border border-zinc-100 shadow-xs overflow-hidden">
+                <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800 shadow-xs overflow-hidden">
                     <div className="overflow-x-auto">
                         <table className="w-full text-right border-collapse">
                             <thead>
-                                <tr className="bg-zinc-50/70 border-b border-zinc-100">
-                                    <th className="px-6 py-4 text-xs font-bold text-zinc-500 uppercase tracking-wider">
+                                <tr className="bg-zinc-50/70 dark:bg-zinc-800/50 border-b border-zinc-100 dark:border-zinc-800">
+                                    <th className="px-6 py-4 text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
                                         اسم الكفيل
                                     </th>
-                                    <th className="px-6 py-4 text-xs font-bold text-zinc-500 uppercase tracking-wider">
+                                    <th className="px-6 py-4 text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
                                         رقم الهوية / السجل
                                     </th>
-                                    <th className="px-6 py-4 text-xs font-bold text-zinc-500 uppercase tracking-wider">
+                                    <th className="px-6 py-4 text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
                                         الدولة
                                     </th>
-                                    <th className="px-6 py-4 text-xs font-bold text-zinc-500 uppercase tracking-wider">
+                                    <th className="px-6 py-4 text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
                                         العنوان
                                     </th>
-                                    <th className="px-6 py-4 text-xs font-bold text-zinc-500 uppercase tracking-wider text-center">
+                                    <th className="px-6 py-4 text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider text-center">
                                         الإجراءات
                                     </th>
                                 </tr>
@@ -139,28 +139,28 @@ export default function Index({ sponsors = [] }: Props) {
                                     filteredSponsors.map((sponsor) => (
                                         <tr
                                             key={sponsor.id}
-                                            className="hover:bg-zinc-50/40 transition-colors"
+                                            className="hover:bg-zinc-50/40 dark:hover:bg-zinc-800/40 transition-colors"
                                         >
                                             <td className="px-6 py-4">
                                                 <div className="flex items-center gap-3">
-                                                    <div className="w-9 h-9 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-sm">
+                                                    <div className="w-9 h-9 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-sm">
                                                         {sponsor.name.charAt(0)}
                                                     </div>
-                                                    <span className="font-bold text-zinc-800 text-sm">
+                                                    <span className="font-bold text-zinc-800 dark:text-zinc-100 text-sm">
                                                         {sponsor.name}
                                                     </span>
                                                 </div>
                                             </td>
-                                            <td className="px-6 py-4 text-sm text-zinc-600 font-medium tracking-wide">
+                                            <td className="px-6 py-4 text-sm text-zinc-600 dark:text-zinc-300 font-medium tracking-wide">
                                                 {sponsor.id_number}
                                             </td>
-                                            <td className="px-6 py-4 text-sm text-zinc-600 font-medium">
-                                                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-zinc-100 text-zinc-800">
+                                            <td className="px-6 py-4 text-sm text-zinc-600 dark:text-zinc-300 font-medium">
+                                                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-zinc-100 text-zinc-800 dark:text-zinc-100">
                                                     {sponsor.country}
                                                 </span>
                                             </td>
                                             <td
-                                                className="px-6 py-4 text-sm text-zinc-500 max-w-xs truncate"
+                                                className="px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400 max-w-xs truncate"
                                                 title={sponsor.address}
                                             >
                                                 {sponsor.address}
@@ -173,7 +173,7 @@ export default function Index({ sponsors = [] }: Props) {
                                                                 sponsor,
                                                             )
                                                         }
-                                                        className="p-2 text-zinc-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl transition-all cursor-pointer"
+                                                        className="p-2 text-zinc-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-xl transition-all cursor-pointer"
                                                         title="تعديل"
                                                     >
                                                         <svg
