@@ -244,10 +244,10 @@ export default function Create({ delegates = [] }: Props) {
                 </div>
 
                 {/* ── خطأ عام ─────────────────────────────────────────────── */}
-                {errors.error && (
+                {(errors as any).error && (
                     <div className="mb-6 p-4 bg-red-50 dark:bg-red-950/30 border border-red-100 dark:border-red-900/30 rounded-2xl flex items-center gap-3 text-red-600 dark:text-red-400 text-sm font-bold">
                         <AlertCircle className="w-5 h-5 shrink-0 animate-pulse" />
-                        <span>{errors.error}</span>
+                        <span>{(errors as any).error}</span>
                     </div>
                 )}
 

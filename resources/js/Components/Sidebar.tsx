@@ -28,7 +28,7 @@ export default function Sidebar({
         name: "مستخدم",
         email: "user@example.com",
     };
-    const company = props.auth?.user.company || {
+    const company = (props.auth?.user as any).company || {
         name: "منصة واثق",
         email: "erfa20045@gmail.com",
     };
