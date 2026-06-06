@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AppLayout from "@/Layouts/AppLayout"; // تأكد من مطابقة مسار الـ Layout الخاص بمشروعك
+import AppLayout from "@/Layouts/AppLayout"; 
 import { Head, router } from "@inertiajs/react";
 import SponsorForm from "./Partials/SponsorForm";
 
@@ -17,9 +17,7 @@ interface Props {
 
 export default function Index({ sponsors = [] }: Props) {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedSponsor, setSelectedSponsor] = useState<Sponsor | null>(
-        null,
-    );
+    const [selectedSponsor, setSelectedSponsor] = useState<Sponsor | null>(null);
     const [searchTerm, setSearchTerm] = useState("");
 
     // تصفية الكفلاء بناءً على حقل البحث (الاسم أو رقم الهوية)
@@ -57,14 +55,13 @@ export default function Index({ sponsors = [] }: Props) {
                             إدارة الكفلاء
                         </h1>
                         <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">
-                            إضافة، تعديل، ومتابعة سجلات الكفلاء والجهات الداعمة
-                            للتأشيرات
+                            إضافة، تعديل، ومتابعة سجلات الكفلاء والجهات الداعمة للتأشيرات
                         </p>
                     </div>
 
                     <button
                         onClick={openCreateModal}
-                        className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold text-sm transition-all shadow-sm shadow-indigo-100 cursor-pointer"
+                        className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-sm transition-all shadow-xs hover:shadow-md shadow-emerald-100/50 dark:shadow-none cursor-pointer"
                     >
                         <svg
                             className="w-5 h-5"
@@ -104,7 +101,7 @@ export default function Index({ sponsors = [] }: Props) {
                         <input
                             type="text"
                             placeholder="بحث باسم الكفيل أو رقم الهوية/السجل..."
-                            className="w-full pr-10 pl-4 py-2.5 bg-zinc-50 dark:bg-zinc-800 dark:text-zinc-100 border border-zinc-200 dark:border-zinc-700 rounded-xl text-sm focus:outline-hidden focus:ring-2 focus:ring-emerald-100 focus:border-emerald-500 transition-all"
+                            className="w-full pr-10 pl-4 py-2.5 bg-zinc-50 dark:bg-zinc-800 dark:text-zinc-100 border border-zinc-200 dark:border-zinc-700 rounded-xl text-sm focus:outline-hidden focus:ring-2 focus:ring-emerald-100 dark:focus:ring-emerald-950/50 focus:border-emerald-500 transition-all"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
@@ -134,7 +131,7 @@ export default function Index({ sponsors = [] }: Props) {
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-zinc-100">
+                            <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">
                                 {filteredSponsors.length > 0 ? (
                                     filteredSponsors.map((sponsor) => (
                                         <tr
@@ -143,7 +140,8 @@ export default function Index({ sponsors = [] }: Props) {
                                         >
                                             <td className="px-6 py-4">
                                                 <div className="flex items-center gap-3">
-                                                    <div className="w-9 h-9 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-sm">
+                                                    {/* أفاتار الحرف الأول - تم تعديله للأخضر الزمردي */}
+                                                    <div className="w-9 h-9 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-600 dark:bg-emerald-950/30 dark:border-emerald-900/50 dark:text-emerald-400 flex items-center justify-center font-bold text-sm">
                                                         {sponsor.name.charAt(0)}
                                                     </div>
                                                     <span className="font-bold text-zinc-800 dark:text-zinc-100 text-sm">
@@ -155,7 +153,8 @@ export default function Index({ sponsors = [] }: Props) {
                                                 {sponsor.id_number}
                                             </td>
                                             <td className="px-6 py-4 text-sm text-zinc-600 dark:text-zinc-300 font-medium">
-                                                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-zinc-100 text-zinc-800 dark:text-zinc-100">
+                                                {/* بادج الدولة - تم تعديله للأخضر الزمردي */}
+                                                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 dark:bg-emerald-950/20 dark:text-emerald-300">
                                                     {sponsor.country}
                                                 </span>
                                             </td>
@@ -167,13 +166,10 @@ export default function Index({ sponsors = [] }: Props) {
                                             </td>
                                             <td className="px-6 py-4">
                                                 <div className="flex items-center justify-center gap-1.5">
+                                                    {/* زر التعديل - تم تعديل الـ Hover للأخضر الزمردي */}
                                                     <button
-                                                        onClick={() =>
-                                                            openEditModal(
-                                                                sponsor,
-                                                            )
-                                                        }
-                                                        className="p-2 text-zinc-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-xl transition-all cursor-pointer"
+                                                        onClick={() => openEditModal(sponsor)}
+                                                        className="p-2 text-zinc-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/30 dark:hover:text-emerald-400 rounded-xl transition-all cursor-pointer"
                                                         title="تعديل"
                                                     >
                                                         <svg
@@ -191,12 +187,8 @@ export default function Index({ sponsors = [] }: Props) {
                                                         </svg>
                                                     </button>
                                                     <button
-                                                        onClick={() =>
-                                                            deleteSponsor(
-                                                                sponsor.id,
-                                                            )
-                                                        }
-                                                        className="p-2 text-zinc-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all cursor-pointer"
+                                                        onClick={() => deleteSponsor(sponsor.id)}
+                                                        className="p-2 text-zinc-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30 rounded-xl transition-all cursor-pointer"
                                                         title="حذف"
                                                     >
                                                         <svg
@@ -223,8 +215,7 @@ export default function Index({ sponsors = [] }: Props) {
                                             colSpan={5}
                                             className="px-6 py-12 text-center text-zinc-400 text-sm"
                                         >
-                                            لا يوجد كفلاء مسجلين يطابقون بحثك
-                                            حالياً..
+                                            لا يوجد كفلاء مسجلين يطابقون بحثك حالياً..
                                         </td>
                                     </tr>
                                 )}
