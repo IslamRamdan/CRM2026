@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import AppLayout from "@/Layouts/AppLayout"; 
 import { Head, router } from "@inertiajs/react";
 import SponsorForm from "./Partials/SponsorForm";
-
 interface Sponsor {
     id: number;
     name: string;

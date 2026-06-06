@@ -70,9 +70,9 @@ export default function LoadingScreen() {
             <div className="flex flex-col items-center gap-6">
                 {/* الحلقة الدوارة بداخلها الشعار */}
                 <div className="relative flex items-center justify-center">
-                    {/* الحلقة الخارجية الدوارة */}
+                    {/* الحلقة الخارجية الدوارة - تم التكبير لـ w-44 h-44 */}
                     <div
-                        className="w-32 h-32 rounded-full border-[5px] border-transparent"
+                        className="w-44 h-44 rounded-full border-[5px] border-transparent"
                         style={{
                             borderTopColor: spinnerColor,
                             borderRightColor: spinnerDimColor,
@@ -82,9 +82,9 @@ export default function LoadingScreen() {
                         }}
                     />
 
-                    {/* الحلقة الداخلية تدور عكسياً */}
+                    {/* الحلقة الداخلية تدور عكسياً - تم التكبير لـ w-36 h-36 */}
                     <div
-                        className="absolute w-24 h-24 rounded-full border-[5px] border-transparent"
+                        className="absolute w-36 h-36 rounded-full border-[5px] border-transparent"
                         style={{
                             borderTopColor: innerColor,
                             borderBottomColor: innerColor,
@@ -94,9 +94,9 @@ export default function LoadingScreen() {
                         }}
                     />
 
-                    {/* شعار الشركة في المنتصف ينبض */}
+                    {/* شعار الشركة في المنتصف ينبض - تم التكبير لـ w-28 h-28 */}
                     <div
-                        className="absolute w-16 h-16 flex items-center justify-center"
+                        className="absolute w-28 h-28 flex items-center justify-center"
                         style={{ animation: "ls-pulse 1.8s ease-in-out infinite" }}
                     >
                         <img
