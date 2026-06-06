@@ -71,7 +71,7 @@ export default function Index({ visas = [], sponsors = [] }: Props) {
         <AppLayout>
             <Head title="إدارة التأشيرات" />
 
-            <div className="max-w-7xl mx-auto p-4 md:p-8" dir="rtl">
+            <div className="max-w-7xl mx-auto py-4 px-2 md:py-8" dir="rtl">
                 {/* الهيدر العلوي */}
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
                     <div>

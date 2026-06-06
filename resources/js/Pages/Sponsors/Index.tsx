@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AppLayout from "@/Layouts/AppLayout"; 
+import AppLayout from "@/Layouts/AppLayout";
 import { Head, router } from "@inertiajs/react";
 import SponsorForm from "./Partials/SponsorForm";
 interface Sponsor {
@@ -16,7 +16,9 @@ interface Props {
 
 export default function Index({ sponsors = [] }: Props) {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedSponsor, setSelectedSponsor] = useState<Sponsor | null>(null);
+    const [selectedSponsor, setSelectedSponsor] = useState<Sponsor | null>(
+        null,
+    );
     const [searchTerm, setSearchTerm] = useState("");
 
     // تصفية الكفلاء بناءً على حقل البحث (الاسم أو رقم الهوية)
@@ -46,7 +48,7 @@ export default function Index({ sponsors = [] }: Props) {
         <AppLayout>
             <Head title="إدارة الكفلاء" />
 
-            <div className="max-w-7xl mx-auto p-4 md:p-8" dir="rtl">
+            <div className="max-w-7xl mx-auto py-4 px-2 md:py-8" dir="rtl">
                 {/* الهيدر العلوي */}
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
                     <div>
@@ -54,7 +56,8 @@ export default function Index({ sponsors = [] }: Props) {
                             إدارة الكفلاء
                         </h1>
                         <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">
-                            إضافة، تعديل، ومتابعة سجلات الكفلاء والجهات الداعمة للتأشيرات
+                            إضافة، تعديل، ومتابعة سجلات الكفلاء والجهات الداعمة
+                            للتأشيرات
                         </p>
                     </div>
 
@@ -167,7 +170,11 @@ export default function Index({ sponsors = [] }: Props) {
                                                 <div className="flex items-center justify-center gap-1.5">
                                                     {/* زر التعديل - تم تعديل الـ Hover للأخضر الزمردي */}
                                                     <button
-                                                        onClick={() => openEditModal(sponsor)}
+                                                        onClick={() =>
+                                                            openEditModal(
+                                                                sponsor,
+                                                            )
+                                                        }
                                                         className="p-2 text-zinc-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/30 dark:hover:text-emerald-400 rounded-xl transition-all cursor-pointer"
                                                         title="تعديل"
                                                     >
@@ -186,7 +193,11 @@ export default function Index({ sponsors = [] }: Props) {
                                                         </svg>
                                                     </button>
                                                     <button
-                                                        onClick={() => deleteSponsor(sponsor.id)}
+                                                        onClick={() =>
+                                                            deleteSponsor(
+                                                                sponsor.id,
+                                                            )
+                                                        }
                                                         className="p-2 text-zinc-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30 rounded-xl transition-all cursor-pointer"
                                                         title="حذف"
                                                     >
@@ -214,7 +225,8 @@ export default function Index({ sponsors = [] }: Props) {
                                             colSpan={5}
                                             className="px-6 py-12 text-center text-zinc-400 text-sm"
                                         >
-                                            لا يوجد كفلاء مسجلين يطابقون بحثك حالياً..
+                                            لا يوجد كفلاء مسجلين يطابقون بحثك
+                                            حالياً..
                                         </td>
                                     </tr>
                                 )}
