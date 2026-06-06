@@ -13,7 +13,9 @@ export default function Register() {
     // إدارة حالة الخطوات (1, 2, 3)
     // -------------------------------------------------------
     const [step, setStep] = useState(1);
-    
+    // أقصى خطوة وصل إليها المستخدم (للتحكم بالنقر على الأرقام)
+    const [maxReachedStep, setMaxReachedStep] = useState(1);
+
     // حالة إظهار/إخفاء كلمات المرور
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -33,12 +35,18 @@ export default function Register() {
 
     // الانتقال للخطوة التالية
     const nextStep = () => {
-        if (step < 3) setStep(step + 1);
+        if (step < 3) {
+            const next = step + 1;
+            setStep(next);
+            if (next > maxReachedStep) setMaxReachedStep(next);
+        }
     };
 
-    // الانتقال لخطوة محددة
+    // الانتقال لخطوة محددة — يُسمح فقط للخطوات التي سبق الوصول إليها
     const goToStep = (targetStep: number) => {
-        setStep(targetStep);
+        if (targetStep <= maxReachedStep) {
+            setStep(targetStep);
+        }
     };
 
     // -------------------------------------------------------
@@ -108,21 +116,29 @@ export default function Register() {
                             }}
                         ></div>
 
-                        {[1, 2, 3].map((num) => (
-                            <button 
-                                key={num}
-                                type="button"
-                                onClick={() => goToStep(num)}
-                                className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
-                                    step >= num 
-                                        ? "text-white" 
-                                        : "bg-white border-2 border-zinc-200 text-zinc-500 dark:bg-zinc-800 dark:border-zinc-700"
-                                }`}
-                                style={step >= num ? { background: "linear-gradient(135deg, #2DAA7E 0%, #1D6B55 100%)" } : {}}
-                            >
-                                {num}
-                            </button>
-                        ))}
+                        {[1, 2, 3].map((num) => {
+                            const isReached = num <= maxReachedStep;
+                            const isActive = num <= step;
+                            return (
+                                <button 
+                                    key={num}
+                                    type="button"
+                                    onClick={() => goToStep(num)}
+                                    disabled={!isReached}
+                                    title={!isReached ? "أكمل الخطوة السابقة أولاً" : undefined}
+                                    className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
+                                        isActive
+                                            ? "text-white"
+                                            : isReached
+                                                ? "bg-white border-2 border-[#2DAA7E] text-[#2DAA7E] dark:bg-zinc-800 dark:border-[#2DAA7E] cursor-pointer hover:scale-110"
+                                                : "bg-white border-2 border-zinc-200 text-zinc-400 dark:bg-zinc-800 dark:border-zinc-700 cursor-not-allowed opacity-50"
+                                    }`}
+                                    style={isActive ? { background: "linear-gradient(135deg, #2DAA7E 0%, #1D6B55 100%)" } : {}}
+                                >
+                                    {num}
+                                </button>
+                            );
+                        })}
                     </div>
 
                     {/* Step Title */}
@@ -211,11 +227,14 @@ export default function Register() {
                                     </label>
                                     <input
                                         type="tel"
+                                        inputMode="numeric"
+                                        pattern="[0-9]*"
                                         dir="ltr"
                                         placeholder="05xxxxxxxx"
+                                        maxLength={15}
                                         className="w-full bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-xl p-3.5 text-sm focus:ring-2 focus:ring-[#2DAA7E] focus:border-[#2DAA7E] dark:focus:ring-[#5CC98B] transition-all outline-none text-left"
                                         value={data.phone}
-                                        onChange={(e) => setData("phone", e.target.value)}
+                                        onChange={(e) => setData("phone", e.target.value.replace(/\D/g, ""))}
                                     />
                                 </div>
                             </div>

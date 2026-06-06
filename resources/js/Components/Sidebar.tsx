@@ -54,13 +54,13 @@ export default function Sidebar({ isCollapsed = false }: SidebarProps) {
 
     return (
         <aside
-            className="w-[280px] min-h-screen bg-white border-l border-zinc-100 shadow-sm flex flex-col justify-between sticky top-0 font-sans"
+            className="w-[280px] min-h-screen bg-white dark:bg-zinc-900 border-l border-zinc-100 dark:border-zinc-800 shadow-sm flex flex-col justify-between sticky top-0 font-sans transition-colors duration-300"
             dir="rtl"
         >
             {/* القسم العلوي (الشعار، التنبيهات، اسم الوكالة، والبحث) */}
             <div>
                 {/* لوجو المنصة (Manasek) */}
-                <div className="p-4 flex justify-center border-b border-zinc-50">
+                <div className="p-4 flex justify-center border-b border-zinc-50 dark:border-zinc-800">
                     <img
                         src="/logo.png"
                         alt="Manasek"
@@ -75,7 +75,7 @@ export default function Sidebar({ isCollapsed = false }: SidebarProps) {
                 {/* معلومات الوكالة الإدارية والتنبيهات */}
                 <div className="px-6 py-4 flex items-center justify-between">
                     {/* زر التنبيهات الجانبي الأنيق */}
-                    <button className="relative p-2 text-zinc-500 hover:text-zinc-800 hover:bg-zinc-50 rounded-xl transition-all cursor-pointer">
+                    <button className="relative p-2 text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-100 hover:bg-zinc-50 dark:hover:bg-zinc-800 rounded-xl transition-all cursor-pointer">
                         <svg
                             className="w-5 h-5"
                             fill="none"
@@ -93,10 +93,10 @@ export default function Sidebar({ isCollapsed = false }: SidebarProps) {
 
                     {/* تفاصيل المنشأة والوكالة */}
                     <div className="text-left">
-                        <p className="text-[10px] text-zinc-400 font-bold tracking-wide">
+                        <p className="text-[10px] text-zinc-400 dark:text-zinc-500 font-bold tracking-wide">
                             الشركة
                         </p>
-                        <p className="text-base font-black text-zinc-800">
+                        <p className="text-base font-black text-zinc-800 dark:text-zinc-100">
                             {company.name}
                         </p>
                     </div>
@@ -113,8 +113,8 @@ export default function Sidebar({ isCollapsed = false }: SidebarProps) {
                                         href={item.href}
                                         className={`group flex items-center justify-between px-4 py-3 rounded-xl font-bold text-sm transition-all duration-200 relative ${
                                             active
-                                                ? "bg-indigo-50/60 text-indigo-700"
-                                                : "text-zinc-700 hover:bg-zinc-50/80 hover:text-zinc-900"
+                                                ? "bg-indigo-50/60 dark:bg-indigo-950/50 text-indigo-700 dark:text-indigo-400"
+                                                : "text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50/80 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100"
                                         }`}
                                     >
                                         {/* الجزء الأيمن: الأيقونة والنص والمؤشر النقطي */}
@@ -139,16 +139,16 @@ export default function Sidebar({ isCollapsed = false }: SidebarProps) {
             </div>
 
             {/* القسم السفلي (بيانات الحساب وزر تسجيل الخروج المستقل) */}
-            <div className="p-4 border-t border-zinc-100 bg-zinc-50/40 space-y-3">
+            <div className="p-4 border-t border-zinc-100 dark:border-zinc-800 bg-zinc-50/40 dark:bg-zinc-900/60 space-y-3">
                 {/* الملف الشخصي المصغر */}
                 <div className="flex items-center justify-between px-2">
                     <div className="flex flex-col text-right min-w-0 overflow-hidden">
-                        <span className="text-xs font-medium text-zinc-500 truncate mr-1">
+                        <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400 truncate mr-1">
                             {user.email}
                         </span>
                     </div>
                     {/* الحرف الأول الافتراضي من الإيميل أو الاسم */}
-                    <div className="w-9 h-9 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 flex items-center justify-center font-black text-sm uppercase shadow-xs shrink-0">
+                    <div className="w-9 h-9 rounded-full bg-indigo-50 dark:bg-indigo-950/70 border border-indigo-100 dark:border-indigo-900 text-indigo-700 dark:text-indigo-400 flex items-center justify-center font-black text-sm uppercase shadow-xs shrink-0">
                         {user.email.charAt(0)}
                     </div>
                 </div>
@@ -158,7 +158,7 @@ export default function Sidebar({ isCollapsed = false }: SidebarProps) {
                     href={route("logout")}
                     method="post"
                     as="button"
-                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-white border border-zinc-200 hover:border-red-200 hover:bg-red-50/40 text-zinc-700 hover:text-red-600 rounded-xl text-xs font-bold shadow-xs transition-all cursor-pointer"
+                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 hover:border-red-200 dark:hover:border-red-900 hover:bg-red-50/40 dark:hover:bg-red-950/30 text-zinc-700 dark:text-zinc-300 hover:text-red-600 dark:hover:text-red-400 rounded-xl text-xs font-bold shadow-xs transition-all cursor-pointer"
                 >
                     <svg
                         className="w-4 h-4 transform rotate-180"
