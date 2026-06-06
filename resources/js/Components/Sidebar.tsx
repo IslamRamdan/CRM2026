@@ -8,8 +8,8 @@ interface SidebarProps {
 export default function Sidebar({ isCollapsed = false }: SidebarProps) {
     const { url, props } = usePage();
     const user = props.auth?.user || {
-        name: "fjhfjhf",
-        email: "erfa20045@gmail.com",
+        name: "مستخدم", // قيمة افتراضية في حال لم يكن المستخدم مسجل بعد
+        email: "user",
     };
     const company = props.auth?.user?.company || {
         name: "منصة", // قيمة افتراضية في حال لم تكن الشركة مسجلة بعد
@@ -32,13 +32,23 @@ export default function Sidebar({ isCollapsed = false }: SidebarProps) {
             icon: "🎯",
             hasDot: true,
         },
-        { href: "/tasks", label: "المهام والمتابعة", icon: "✅" },
+        { href: "/delegates", label: "المناديب", icon: "✅" },
         { href: "/groups", label: "المجموعات", icon: "🕌" },
         { href: "/pilgrims", label: "الحجاج", icon: "👥" },
         { href: "/sub-agents", label: "الوكلاء الفرعيون", icon: "🤝" },
         { href: "/visas", label: "التأشيرات", icon: "🛂" },
         { href: "/passport-check", label: "فحص الجوازات", icon: "🪪" },
         { href: "/vaccines", label: "التطعيمات", icon: "💉" },
+        { href: "/hotels", label: "الفنادق والغرف", icon: "🏨" },
+        { href: "/hotels", label: "الفنادق والغرف", icon: "🏨" },
+        { href: "/hotels", label: "الفنادق والغرف", icon: "🏨" },
+        { href: "/hotels", label: "الفنادق والغرف", icon: "🏨" },
+        { href: "/hotels", label: "الفنادق والغرف", icon: "🏨" },
+        { href: "/hotels", label: "الفنادق والغرف", icon: "🏨" },
+        { href: "/hotels", label: "الفنادق والغرف", icon: "🏨" },
+        { href: "/hotels", label: "الفنادق والغرف", icon: "🏨" },
+        { href: "/hotels", label: "الفنادق والغرف", icon: "🏨" },
+        { href: "/hotels", label: "الفنادق والغرف", icon: "🏨" },
         { href: "/hotels", label: "الفنادق والغرف", icon: "🏨" },
     ];
 
