@@ -4,6 +4,8 @@ use App\Http\Controllers\Auth\CompanyRegisterController;
 use App\Http\Controllers\Company\UserController;
 use App\Http\Controllers\Delegate\DelegateController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Sponsor\SponsorController;
+use App\Http\Controllers\Visa\VisaController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -49,4 +51,21 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/delegates/{delegate}', [DelegateController::class, 'destroy'])->name('delegates.destroy');
 });
 
+Route::middleware(['auth', 'verified'])->group(function () {
+
+    // مسارات إدارة الكفلاء
+    Route::get('/sponsors', [SponsorController::class, 'index'])->name('sponsors.index');
+    Route::post('/sponsors', [SponsorController::class, 'store'])->name('sponsors.store');
+    Route::put('/sponsors/{sponsor}', [SponsorController::class, 'update'])->name('sponsors.update');
+    Route::delete('/sponsors/{sponsor}', [SponsorController::class, 'destroy'])->name('sponsors.destroy');
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+
+    // مسارات إدارة التأشيرات
+    Route::get('/visas', [VisaController::class, 'index'])->name('visas.index');
+    Route::post('/visas', [VisaController::class, 'store'])->name('visas.store');
+    Route::put('/visas/{visa}', [VisaController::class, 'update'])->name('visas.update');
+    Route::delete('/visas/{visa}', [VisaController::class, 'destroy'])->name('visas.destroy');
+});
 require __DIR__ . '/auth.php';

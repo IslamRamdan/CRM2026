@@ -26,30 +26,9 @@ export default function Sidebar({ isCollapsed = false }: SidebarProps) {
     // مصفوفة عناصر القائمة بناءً على التصميم المرفق في الصورة
     const menuItems = [
         { href: "/dashboard", label: "لوحة التحكم", icon: "📊" },
-        {
-            href: "/leads",
-            label: "العملاء المحتملون",
-            icon: "🎯",
-            hasDot: true,
-        },
         { href: "/delegates", label: "المناديب", icon: "✅" },
-        { href: "/groups", label: "المجموعات", icon: "🕌" },
-        { href: "/pilgrims", label: "الحجاج", icon: "👥" },
-        { href: "/sub-agents", label: "الوكلاء الفرعيون", icon: "🤝" },
-        { href: "/visas", label: "التأشيرات", icon: "🛂" },
-        { href: "/passport-check", label: "فحص الجوازات", icon: "🪪" },
-        { href: "/vaccines", label: "التطعيمات", icon: "💉" },
-        { href: "/hotels", label: "الفنادق والغرف", icon: "🏨" },
-        { href: "/hotels", label: "الفنادق والغرف", icon: "🏨" },
-        { href: "/hotels", label: "الفنادق والغرف", icon: "🏨" },
-        { href: "/hotels", label: "الفنادق والغرف", icon: "🏨" },
-        { href: "/hotels", label: "الفنادق والغرف", icon: "🏨" },
-        { href: "/hotels", label: "الفنادق والغرف", icon: "🏨" },
-        { href: "/hotels", label: "الفنادق والغرف", icon: "🏨" },
-        { href: "/hotels", label: "الفنادق والغرف", icon: "🏨" },
-        { href: "/hotels", label: "الفنادق والغرف", icon: "🏨" },
-        { href: "/hotels", label: "الفنادق والغرف", icon: "🏨" },
-        { href: "/hotels", label: "الفنادق والغرف", icon: "🏨" },
+        { href: "/sponsors", label: "الكفلاء", icon: "🕌" },
+        { href: "/visas", label: "التاشيرات", icon: "👥" },
     ];
 
     return (
