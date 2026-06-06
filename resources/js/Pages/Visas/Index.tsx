@@ -75,10 +75,10 @@ export default function Index({ visas = [], sponsors = [] }: Props) {
                 {/* الهيدر العلوي */}
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
                     <div>
-                        <h1 className="text-2xl font-black text-zinc-900">
+                        <h1 className="text-2xl font-black text-zinc-900 dark:text-zinc-100">
                             إدارة التأشيرات
                         </h1>
-                        <p className="text-sm text-zinc-500 mt-1">
+                        <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">
                             عرض وإدخال التأشيرات الصادرة وربطها بالكفلاء
                             المعتمدين
                         </p>
@@ -86,7 +86,7 @@ export default function Index({ visas = [], sponsors = [] }: Props) {
 
                     <button
                         onClick={openCreateModal}
-                        className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold text-sm transition-all shadow-sm shadow-indigo-100 cursor-pointer"
+                        className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-sm transition-all shadow-sm shadow-emerald-100 cursor-pointer"
                     >
                         <svg
                             className="w-5 h-5"
@@ -106,7 +106,7 @@ export default function Index({ visas = [], sponsors = [] }: Props) {
                 </div>
 
                 {/* شريط البحث */}
-                <div className="bg-white p-4 rounded-2xl border border-zinc-100 shadow-xs mb-6">
+                <div className="bg-white dark:bg-zinc-900 p-4 rounded-2xl border border-zinc-100 dark:border-zinc-800 shadow-xs mb-6">
                     <div className="relative max-w-md">
                         <span className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-zinc-400">
                             <svg
@@ -126,7 +126,7 @@ export default function Index({ visas = [], sponsors = [] }: Props) {
                         <input
                             type="text"
                             placeholder="بحث باسم التأشيرة، رقم الصادر، أو الكفيل..."
-                            className="w-full pr-10 pl-4 py-2.5 bg-zinc-50 border border-zinc-200 rounded-xl text-sm focus:outline-hidden focus:ring-2 focus:ring-indigo-100 focus:border-indigo-500 transition-all"
+                            className="w-full pr-10 pl-4 py-2.5 bg-zinc-50 dark:bg-zinc-800 dark:text-zinc-100 border border-zinc-200 dark:border-zinc-700 rounded-xl text-sm focus:outline-hidden focus:ring-2 focus:ring-emerald-100 focus:border-emerald-500 transition-all"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
@@ -134,30 +134,30 @@ export default function Index({ visas = [], sponsors = [] }: Props) {
                 </div>
 
                 {/* جدول البيانات */}
-                <div className="bg-white rounded-2xl border border-zinc-100 shadow-xs overflow-hidden">
+                <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800 shadow-xs overflow-hidden">
                     <div className="overflow-x-auto">
                         <table className="w-full text-right border-collapse">
                             <thead>
-                                <tr className="bg-zinc-50/70 border-b border-zinc-100">
-                                    <th className="px-6 py-4 text-xs font-bold text-zinc-500 uppercase tracking-wider">
+                                <tr className="bg-zinc-50/70 dark:bg-zinc-800/50 border-b border-zinc-100 dark:border-zinc-800">
+                                    <th className="px-6 py-4 text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
                                         اسم التأشيرة
                                     </th>
-                                    <th className="px-6 py-4 text-xs font-bold text-zinc-500 uppercase tracking-wider">
+                                    <th className="px-6 py-4 text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
                                         النوع
                                     </th>
-                                    <th className="px-6 py-4 text-xs font-bold text-zinc-500 uppercase tracking-wider">
+                                    <th className="px-6 py-4 text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
                                         رقم الصادر
                                     </th>
-                                    <th className="px-6 py-4 text-xs font-bold text-zinc-500 uppercase tracking-wider">
+                                    <th className="px-6 py-4 text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
                                         القنصلية
                                     </th>
-                                    <th className="px-6 py-4 text-xs font-bold text-zinc-500 uppercase tracking-wider">
+                                    <th className="px-6 py-4 text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
                                         التاريخ الهجري
                                     </th>
-                                    <th className="px-6 py-4 text-xs font-bold text-zinc-500 uppercase tracking-wider">
+                                    <th className="px-6 py-4 text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
                                         الكفيل المرتبط
                                     </th>
-                                    <th className="px-6 py-4 text-xs font-bold text-zinc-500 uppercase tracking-wider text-center">
+                                    <th className="px-6 py-4 text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider text-center">
                                         الإجراءات
                                     </th>
                                 </tr>
@@ -167,28 +167,28 @@ export default function Index({ visas = [], sponsors = [] }: Props) {
                                     filteredVisas.map((visa) => (
                                         <tr
                                             key={visa.id}
-                                            className="hover:bg-zinc-50/40 transition-colors"
+                                            className="hover:bg-zinc-50/40 dark:hover:bg-zinc-800/40 transition-colors"
                                         >
-                                            <td className="px-6 py-4 font-bold text-zinc-800 text-sm">
+                                            <td className="px-6 py-4 font-bold text-zinc-800 dark:text-zinc-100 text-sm">
                                                 {visa.name}
                                             </td>
-                                            <td className="px-6 py-4 text-sm text-zinc-600 font-medium">
-                                                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-50 text-indigo-700">
+                                            <td className="px-6 py-4 text-sm text-zinc-600 dark:text-zinc-300 font-medium">
+                                                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700">
                                                     {getVisaTypeLabel(
                                                         visa.type,
                                                     )}
                                                 </span>
                                             </td>
-                                            <td className="px-6 py-4 text-sm text-zinc-600 font-mono tracking-wide">
+                                            <td className="px-6 py-4 text-sm text-zinc-600 dark:text-zinc-300 font-mono tracking-wide">
                                                 {visa.issue_number}
                                             </td>
-                                            <td className="px-6 py-4 text-sm text-zinc-500">
+                                            <td className="px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">
                                                 {visa.consulate}
                                             </td>
-                                            <td className="px-6 py-4 text-sm text-zinc-500 font-medium">
+                                            <td className="px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400 font-medium">
                                                 {visa.issue_date_hijri}
                                             </td>
-                                            <td className="px-6 py-4 text-sm text-zinc-800 font-semibold">
+                                            <td className="px-6 py-4 text-sm text-zinc-800 dark:text-zinc-100 font-semibold">
                                                 {visa.sponsor?.name || (
                                                     <span className="text-red-400 text-xs">
                                                         غير محدد
@@ -201,7 +201,7 @@ export default function Index({ visas = [], sponsors = [] }: Props) {
                                                         onClick={() =>
                                                             openEditModal(visa)
                                                         }
-                                                        className="p-2 text-zinc-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl transition-all cursor-pointer"
+                                                        className="p-2 text-zinc-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-xl transition-all cursor-pointer"
                                                         title="تعديل"
                                                     >
                                                         <svg

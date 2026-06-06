@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useForm } from "@inertiajs/react";
 
+import Modal from "@/Components/Modal";
+
 interface Sponsor {
     id: number;
     name: string;
@@ -74,14 +76,9 @@ export default function VisaForm({
         }
     };
 
-    if (!isOpen) return null;
-
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-900/40 backdrop-blur-xs transition-opacity animate-fade-in">
-            <div
-                className="bg-white w-full max-w-lg rounded-2xl shadow-xl border border-zinc-100 flex flex-col max-h-[90vh] animate-in zoom-in-95 duration-150"
-                dir="rtl"
-            >
+        <Modal show={isOpen} onClose={onClose} maxWidth="lg">
+            <div className="flex flex-col max-h-[90vh]" dir="rtl">
                 {/* هيدر المودال */}
                 <div className="p-5 border-b border-zinc-100 flex items-center justify-between bg-zinc-50/50 rounded-t-2xl">
                     <h3 className="text-base font-black text-zinc-800">
@@ -121,7 +118,7 @@ export default function VisaForm({
                             type="text"
                             value={data.name}
                             onChange={(e) => setData("name", e.target.value)}
-                            className={`w-full px-4 py-2.5 bg-zinc-50/50 border rounded-xl text-sm transition-all focus:outline-hidden focus:ring-2 ${errors.name ? "border-red-300 focus:ring-red-100" : "border-zinc-200 focus:ring-indigo-100 focus:border-indigo-500"}`}
+                            className={`w-full px-4 py-2.5 bg-zinc-50/50 border rounded-xl text-sm transition-all focus:outline-hidden focus:ring-2 ${errors.name ? "border-red-300 focus:ring-red-100" : "border-zinc-200 focus:ring-emerald-100 focus:border-emerald-500"}`}
                             placeholder="مثال: تأشيرة موسم الحج 1447"
                         />
                         {errors.name && (
@@ -142,7 +139,7 @@ export default function VisaForm({
                                 onChange={(e) =>
                                     setData("type", e.target.value)
                                 }
-                                className={`w-full px-4 py-2.5 bg-zinc-50/50 border rounded-xl text-sm transition-all focus:outline-hidden focus:ring-2 ${errors.type ? "border-red-300 focus:ring-red-100" : "border-zinc-200 focus:ring-indigo-100 focus:border-indigo-500"}`}
+                                className={`w-full px-4 py-2.5 bg-zinc-50/50 border rounded-xl text-sm transition-all focus:outline-hidden focus:ring-2 ${errors.type ? "border-red-300 focus:ring-red-100" : "border-zinc-200 focus:ring-emerald-100 focus:border-emerald-500"}`}
                             >
                                 <option value="">
                                     -- اختر نوع التأشيرة --
@@ -171,7 +168,7 @@ export default function VisaForm({
                                 onChange={(e) =>
                                     setData("sponsor_id", e.target.value)
                                 }
-                                className={`w-full px-4 py-2.5 bg-zinc-50/50 border rounded-xl text-sm transition-all focus:outline-hidden focus:ring-2 ${errors.sponsor_id ? "border-red-300 focus:ring-red-100" : "border-zinc-200 focus:ring-indigo-100 focus:border-indigo-500"}`}
+                                className={`w-full px-4 py-2.5 bg-zinc-50/50 border rounded-xl text-sm transition-all focus:outline-hidden focus:ring-2 ${errors.sponsor_id ? "border-red-300 focus:ring-red-100" : "border-zinc-200 focus:ring-emerald-100 focus:border-emerald-500"}`}
                             >
                                 <option value="">
                                     -- اختر الكفيل المعتمد --
@@ -202,7 +199,7 @@ export default function VisaForm({
                                 onChange={(e) =>
                                     setData("issue_number", e.target.value)
                                 }
-                                className={`w-full px-4 py-2.5 bg-zinc-50/50 border rounded-xl text-sm transition-all focus:outline-hidden focus:ring-2 ${errors.issue_number ? "border-red-300 focus:ring-red-100" : "border-zinc-200 focus:ring-indigo-100 focus:border-indigo-500"}`}
+                                className={`w-full px-4 py-2.5 bg-zinc-50/50 border rounded-xl text-sm transition-all focus:outline-hidden focus:ring-2 ${errors.issue_number ? "border-red-300 focus:ring-red-100" : "border-zinc-200 focus:ring-emerald-100 focus:border-emerald-500"}`}
                                 placeholder="أدخل رقم الصادر الإلكتروني"
                             />
                             {errors.issue_number && (
@@ -221,7 +218,7 @@ export default function VisaForm({
                                 onChange={(e) =>
                                     setData("consulate", e.target.value)
                                 }
-                                className={`w-full px-4 py-2.5 bg-zinc-50/50 border rounded-xl text-sm transition-all focus:outline-hidden focus:ring-2 ${errors.consulate ? "border-red-300 focus:ring-red-100" : "border-zinc-200 focus:ring-indigo-100 focus:border-indigo-500"}`}
+                                className={`w-full px-4 py-2.5 bg-zinc-50/50 border rounded-xl text-sm transition-all focus:outline-hidden focus:ring-2 ${errors.consulate ? "border-red-300 focus:ring-red-100" : "border-zinc-200 focus:ring-emerald-100 focus:border-emerald-500"}`}
                             >
                                 <option value="">-- اختر القنصلية --</option>
                                 <option value="القاهرة">القاهرة</option>
@@ -247,7 +244,7 @@ export default function VisaForm({
                             onChange={(e) =>
                                 setData("issue_date_hijri", e.target.value)
                             }
-                            className={`w-full px-4 py-2.5 bg-zinc-50/50 border rounded-xl text-sm transition-all focus:outline-hidden focus:ring-2 ${errors.issue_date_hijri ? "border-red-300 focus:ring-red-100" : "border-zinc-200 focus:ring-indigo-100 focus:border-indigo-500"}`}
+                            className={`w-full px-4 py-2.5 bg-zinc-50/50 border rounded-xl text-sm transition-all focus:outline-hidden focus:ring-2 ${errors.issue_date_hijri ? "border-red-300 focus:ring-red-100" : "border-zinc-200 focus:ring-emerald-100 focus:border-emerald-500"}`}
                             placeholder="مثال: 15/08/1447"
                         />
                         {errors.issue_date_hijri && (
@@ -262,7 +259,7 @@ export default function VisaForm({
                         <button
                             type="submit"
                             disabled={processing}
-                            className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition-all shadow-sm shadow-indigo-100 disabled:opacity-50 cursor-pointer text-center text-sm"
+                            className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition-all shadow-sm shadow-emerald-100 disabled:opacity-50 cursor-pointer text-center text-sm"
                         >
                             {processing
                                 ? "جاري الحفظ والربط.."
@@ -280,6 +277,6 @@ export default function VisaForm({
                     </div>
                 </form>
             </div>
-        </div>
+        </Modal>
     );
 }

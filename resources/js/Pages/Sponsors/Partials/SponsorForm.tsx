@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useForm } from "@inertiajs/react";
+import Modal from "@/Components/Modal";
 
 interface Sponsor {
     id: number;
@@ -59,14 +60,9 @@ export default function SponsorForm({ isOpen, onClose, sponsor }: Props) {
         }
     };
 
-    if (!isOpen) return null;
-
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-900/40 backdrop-blur-xs transition-opacity animate-fade-in">
-            <div
-                className="bg-white w-full max-w-lg rounded-2xl shadow-xl border border-zinc-100 flex flex-col max-h-[90vh] animate-in zoom-in-95 duration-150"
-                dir="rtl"
-            >
+        <Modal show={isOpen} onClose={onClose} maxWidth="lg">
+            <div className="flex flex-col max-h-[90vh]" dir="rtl">
                 {/* هيدر المودال */}
                 <div className="p-5 border-b border-zinc-100 flex items-center justify-between bg-zinc-50/50 rounded-t-2xl">
                     <h3 className="text-base font-black text-zinc-800">
@@ -106,7 +102,7 @@ export default function SponsorForm({ isOpen, onClose, sponsor }: Props) {
                             type="text"
                             value={data.name}
                             onChange={(e) => setData("name", e.target.value)}
-                            className={`w-full px-4 py-2.5 bg-zinc-50/50 border rounded-xl text-sm transition-all focus:outline-hidden focus:ring-2 ${errors.name ? "border-red-300 focus:ring-red-100" : "border-zinc-200 focus:ring-indigo-100 focus:border-indigo-500"}`}
+                            className={`w-full px-4 py-2.5 bg-zinc-50/50 border rounded-xl text-sm transition-all focus:outline-hidden focus:ring-2 ${errors.name ? "border-red-300 focus:ring-red-100" : "border-zinc-200 focus:ring-emerald-100 focus:border-emerald-500"}`}
                             placeholder="أدخل اسم الكفيل بالكامل.."
                         />
                         {errors.name && (
@@ -128,7 +124,7 @@ export default function SponsorForm({ isOpen, onClose, sponsor }: Props) {
                                 onChange={(e) =>
                                     setData("id_number", e.target.value)
                                 }
-                                className={`w-full px-4 py-2.5 bg-zinc-50/50 border rounded-xl text-sm transition-all focus:outline-hidden focus:ring-2 ${errors.id_number ? "border-red-300 focus:ring-red-100" : "border-zinc-200 focus:ring-indigo-100 focus:border-indigo-500"}`}
+                                className={`w-full px-4 py-2.5 bg-zinc-50/50 border rounded-xl text-sm transition-all focus:outline-hidden focus:ring-2 ${errors.id_number ? "border-red-300 focus:ring-red-100" : "border-zinc-200 focus:ring-emerald-100 focus:border-emerald-500"}`}
                                 placeholder="رقم السجل أو الإقامة الموحد"
                             />
                             {errors.id_number && (
@@ -148,7 +144,7 @@ export default function SponsorForm({ isOpen, onClose, sponsor }: Props) {
                                 onChange={(e) =>
                                     setData("country", e.target.value)
                                 }
-                                className={`w-full px-4 py-2.5 bg-zinc-50/50 border rounded-xl text-sm transition-all focus:outline-hidden focus:ring-2 ${errors.country ? "border-red-300 focus:ring-red-100" : "border-zinc-200 focus:ring-indigo-100 focus:border-indigo-500"}`}
+                                className={`w-full px-4 py-2.5 bg-zinc-50/50 border rounded-xl text-sm transition-all focus:outline-hidden focus:ring-2 ${errors.country ? "border-red-300 focus:ring-red-100" : "border-zinc-200 focus:ring-emerald-100 focus:border-emerald-500"}`}
                                 placeholder="مثال: المملكة العربية السعودية"
                             />
                             {errors.country && (
@@ -167,7 +163,7 @@ export default function SponsorForm({ isOpen, onClose, sponsor }: Props) {
                         <textarea
                             value={data.address}
                             onChange={(e) => setData("address", e.target.value)}
-                            className={`w-full px-4 py-2.5 bg-zinc-50/50 border rounded-xl text-sm transition-all focus:outline-hidden focus:ring-2 ${errors.address ? "border-red-300 focus:ring-red-100" : "border-zinc-200 focus:ring-indigo-100 focus:border-indigo-500"}`}
+                            className={`w-full px-4 py-2.5 bg-zinc-50/50 border rounded-xl text-sm transition-all focus:outline-hidden focus:ring-2 ${errors.address ? "border-red-300 focus:ring-red-100" : "border-zinc-200 focus:ring-emerald-100 focus:border-emerald-500"}`}
                             placeholder="المدينة، الحي، الشارع، المجمع الإداري..."
                             rows={3}
                         />
@@ -183,7 +179,7 @@ export default function SponsorForm({ isOpen, onClose, sponsor }: Props) {
                         <button
                             type="submit"
                             disabled={processing}
-                            className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition-all shadow-sm shadow-indigo-100 disabled:opacity-50 cursor-pointer text-center text-sm"
+                            className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition-all shadow-sm shadow-emerald-100 disabled:opacity-50 cursor-pointer text-center text-sm"
                         >
                             {processing
                                 ? "جاري الحفظ والرفع.."
@@ -201,6 +197,6 @@ export default function SponsorForm({ isOpen, onClose, sponsor }: Props) {
                     </div>
                 </form>
             </div>
-        </div>
+        </Modal>
     );
 }

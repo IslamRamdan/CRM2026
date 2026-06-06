@@ -49,17 +49,17 @@ export default function Index({ delegates }: Props) {
                 {/* الرأس والإحصائيات السريعة */}
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
                     <div>
-                        <h1 className="text-2xl font-black text-zinc-900">
+                        <h1 className="text-2xl font-black text-zinc-900 dark:text-zinc-100">
                             إدارة المندوبين
                         </h1>
-                        <p className="text-sm text-zinc-500 mt-1">
+                        <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">
                             عرض وإدارة كافة المناديب المسجلين في وكالتك
                         </p>
                     </div>
 
                     <button
                         onClick={openCreateModal}
-                        className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold text-sm transition-all shadow-sm shadow-indigo-200"
+                        className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-sm transition-all shadow-sm shadow-emerald-200"
                     >
                         <svg
                             className="w-5 h-5"
@@ -79,7 +79,7 @@ export default function Index({ delegates }: Props) {
                 </div>
 
                 {/* شريط البحث */}
-                <div className="bg-white p-4 rounded-2xl border border-zinc-100 shadow-sm mb-6">
+                <div className="bg-white dark:bg-zinc-900 p-4 rounded-2xl border border-zinc-100 dark:border-zinc-800 shadow-sm mb-6">
                     <div className="relative max-w-md">
                         <span className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                             <svg
@@ -99,7 +99,7 @@ export default function Index({ delegates }: Props) {
                         <input
                             type="text"
                             placeholder="بحث باسم المندوب أو رقم الهاتف..."
-                            className="w-full pr-10 pl-4 py-2 bg-zinc-50 border border-zinc-200 rounded-xl text-sm focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                            className="w-full pr-10 pl-4 py-2 bg-zinc-50 dark:bg-zinc-800 dark:text-zinc-100 border border-zinc-200 dark:border-zinc-700 rounded-xl text-sm focus:ring-emerald-500 focus:border-emerald-500 transition-all"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
@@ -107,17 +107,17 @@ export default function Index({ delegates }: Props) {
                 </div>
 
                 {/* جدول البيانات */}
-                <div className="bg-white rounded-2xl border border-zinc-100 shadow-sm overflow-hidden">
+                <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800 shadow-sm overflow-hidden">
                     <table className="w-full text-right border-collapse">
                         <thead>
-                            <tr className="bg-zinc-50/50 border-b border-zinc-100">
-                                <th className="px-6 py-4 text-xs font-bold text-zinc-500 uppercase tracking-wider">
+                            <tr className="bg-zinc-50/50 dark:bg-zinc-800/50 border-b border-zinc-100 dark:border-zinc-800">
+                                <th className="px-6 py-4 text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
                                     الاسم
                                 </th>
-                                <th className="px-6 py-4 text-xs font-bold text-zinc-500 uppercase tracking-wider">
+                                <th className="px-6 py-4 text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
                                     رقم الهاتف
                                 </th>
-                                <th className="px-6 py-4 text-xs font-bold text-zinc-500 uppercase tracking-wider text-center">
+                                <th className="px-6 py-4 text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider text-center">
                                     الإجراءات
                                 </th>
                             </tr>
@@ -131,15 +131,15 @@ export default function Index({ delegates }: Props) {
                                     >
                                         <td className="px-6 py-4">
                                             <div className="flex items-center gap-3">
-                                                <div className="w-10 h-10 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold">
+                                                <div className="w-10 h-10 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold">
                                                     {delegate.name.charAt(0)}
                                                 </div>
-                                                <span className="font-bold text-zinc-800 text-sm">
+                                                <span className="font-bold text-zinc-800 dark:text-zinc-100 text-sm">
                                                     {delegate.name}
                                                 </span>
                                             </div>
                                         </td>
-                                        <td className="px-6 py-4 text-sm text-zinc-600 font-medium tracking-wide">
+                                        <td className="px-6 py-4 text-sm text-zinc-600 dark:text-zinc-300 font-medium tracking-wide">
                                             {delegate.phone}
                                         </td>
                                         <td className="px-6 py-4">
@@ -148,7 +148,7 @@ export default function Index({ delegates }: Props) {
                                                     onClick={() =>
                                                         openEditModal(delegate)
                                                     }
-                                                    className="p-2 text-zinc-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all"
+                                                    className="p-2 text-zinc-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-all"
                                                     title="تعديل"
                                                 >
                                                     <svg

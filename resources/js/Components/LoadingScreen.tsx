@@ -33,7 +33,7 @@ export default function LoadingScreen() {
         <div
             className="fixed inset-0 z-[9999] flex items-center justify-center"
             style={{
-                background: "linear-gradient(135deg, #1a2e22 0%, #0f1a14 100%)",
+                background: "linear-gradient(135deg, #0f1a14 0%, #000 100%)",
             }}
         >
             {/* الحاوية المركزية */}
@@ -42,7 +42,7 @@ export default function LoadingScreen() {
                 <div className="relative flex items-center justify-center">
                     {/* الحلقة الخارجية الدوارة */}
                     <div
-                        className="w-24 h-24 rounded-full border-4 border-transparent"
+                        className="w-32 h-32 rounded-full border-[5px] border-transparent"
                         style={{
                             borderTopColor: "#eab308",
                             borderRightColor: "rgba(234,179,8,0.3)",
@@ -54,7 +54,7 @@ export default function LoadingScreen() {
 
                     {/* الحلقة الداخلية تدور عكسياً */}
                     <div
-                        className="absolute w-16 h-16 rounded-full border-4 border-transparent"
+                        className="absolute w-24 h-24 rounded-full border-[5px] border-transparent"
                         style={{
                             borderTopColor: "rgba(255,255,255,0.15)",
                             borderBottomColor: "rgba(255,255,255,0.4)",
@@ -66,7 +66,7 @@ export default function LoadingScreen() {
 
                     {/* شعار الشركة في المنتصف ينبض */}
                     <div
-                        className="absolute w-10 h-10 flex items-center justify-center"
+                        className="absolute w-16 h-16 flex items-center justify-center"
                         style={{ animation: "logoPulse 1.8s ease-in-out infinite" }}
                     >
                         <img

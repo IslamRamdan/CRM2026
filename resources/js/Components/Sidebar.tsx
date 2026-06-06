@@ -28,7 +28,7 @@ export default function Sidebar({
         name: "مستخدم",
         email: "user@example.com",
     };
-    const company = props.auth?.user?.company || {
+    const company = props.auth?.company || {
         name: "منصة واثق",
         email: "erfa20045@gmail.com",
     };
@@ -46,7 +46,7 @@ export default function Sidebar({
 
     return (
         <aside
-            className={`min-h-screen bg-white dark:bg-zinc-900 border-l border-zinc-100 dark:border-zinc-800 shadow-sm flex flex-col justify-between sticky top-0 font-sans transition-all duration-300 relative group/sidebar ${
+            className={`min-h-screen bg-white dark:bg-zinc-900 border-l border-zinc-100 dark:border-zinc-800 shadow-sm flex flex-col justify-between sticky top-0 font-sans transition-all duration-300 group/sidebar ${
                 collapsed ? "w-[80px]" : "w-[280px]"
             }`}
             dir="rtl"
@@ -81,7 +81,7 @@ export default function Sidebar({
             {/* القسم العلوي */}
             <div>
                 {/* لوجو المنصة */}
-                <div className="p-4 flex justify-center border-b border-zinc-50 dark:border-zinc-800 h-[73px] items-center">
+                <div className="p-4 flex justify-center border-b border-zinc-50 dark:border-zinc-800 h-[85px] items-center">
                     {collapsed ? (
                         <span className="text-xl font-black text-emerald-600 dark:text-emerald-400 tracking-wider animate-fade-in">
                             W
@@ -90,7 +90,7 @@ export default function Sidebar({
                         <img
                             src="/logo.png"
                             alt="Wathiq"
-                            className="h-10 w-auto object-contain animate-fade-in"
+                            className="h-14 w-auto object-contain animate-fade-in"
                             onError={(e) => {
                                 e.currentTarget.style.display = "none";
                             }}
@@ -148,8 +148,8 @@ export default function Sidebar({
                                                 : "justify-between px-4 py-3"
                                         } ${
                                             active
-                                                ? "bg-emerald-50/60 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400"
-                                                : "text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50/80 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100"
+                                                ? "bg-emerald-50 border border-emerald-200 shadow-sm shadow-emerald-100 text-emerald-700 dark:bg-emerald-950/40 dark:border-transparent dark:shadow-none dark:text-emerald-400"
+                                                : "border border-transparent text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50/80 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100"
                                         }`}
                                         title={collapsed ? item.label : ""}
                                     >

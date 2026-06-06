@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useForm } from "@inertiajs/react";
+import Modal from "@/Components/Modal";
 
 interface Delegate {
     id: number;
@@ -50,14 +51,9 @@ export default function DelegateForm({ isOpen, onClose, delegate }: Props) {
         }
     };
 
-    if (!isOpen) return null;
-
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-900/40 backdrop-blur-sm transition-opacity">
-            <div
-                className="bg-white w-full max-w-md rounded-2xl shadow-xl border border-zinc-100 animate-in fade-in zoom-in duration-200"
-                dir="rtl"
-            >
+        <Modal show={isOpen} onClose={onClose} maxWidth="md">
+            <div className="flex flex-col max-h-[90vh]" dir="rtl">
                 <div className="p-6 border-b border-zinc-50 flex items-center justify-between">
                     <h3 className="text-lg font-black text-zinc-800">
                         {delegate ? "تعديل بيانات المندوب" : "إضافة مندوب جديد"}
@@ -91,7 +87,7 @@ export default function DelegateForm({ isOpen, onClose, delegate }: Props) {
                             type="text"
                             value={data.name}
                             onChange={(e) => setData("name", e.target.value)}
-                            className={`w-full px-4 py-2.5 bg-zinc-50 border rounded-xl text-sm transition-all focus:ring-2 ${errors.name ? "border-red-300 focus:ring-red-100" : "border-zinc-200 focus:ring-indigo-100 focus:border-indigo-500"}`}
+                            className={`w-full px-4 py-2.5 bg-zinc-50 border rounded-xl text-sm transition-all focus:ring-2 ${errors.name ? "border-red-300 focus:ring-red-100" : "border-zinc-200 focus:ring-emerald-100 focus:border-emerald-500"}`}
                             placeholder="أدخل الاسم الرباعي.."
                         />
                         {errors.name && (
@@ -109,7 +105,7 @@ export default function DelegateForm({ isOpen, onClose, delegate }: Props) {
                             type="text"
                             value={data.phone}
                             onChange={(e) => setData("phone", e.target.value)}
-                            className={`w-full px-4 py-2.5 bg-zinc-50 border rounded-xl text-sm transition-all focus:ring-2 ${errors.phone ? "border-red-300 focus:ring-red-100" : "border-zinc-200 focus:ring-indigo-100 focus:border-indigo-500"}`}
+                            className={`w-full px-4 py-2.5 bg-zinc-50 border rounded-xl text-sm transition-all focus:ring-2 ${errors.phone ? "border-red-300 focus:ring-red-100" : "border-zinc-200 focus:ring-emerald-100 focus:border-emerald-500"}`}
                             placeholder="مثال: 05XXXXXXXX"
                         />
                         {errors.phone && (
@@ -123,7 +119,7 @@ export default function DelegateForm({ isOpen, onClose, delegate }: Props) {
                         <button
                             type="submit"
                             disabled={processing}
-                            className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition-all shadow-md shadow-indigo-100 disabled:opacity-50"
+                            className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition-all shadow-md shadow-emerald-100 disabled:opacity-50"
                         >
                             {processing
                                 ? "جاري الحفظ.."
@@ -141,6 +137,6 @@ export default function DelegateForm({ isOpen, onClose, delegate }: Props) {
                     </div>
                 </form>
             </div>
-        </div>
+        </Modal>
     );
 }
