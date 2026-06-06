@@ -3,38 +3,68 @@ import { router } from "@inertiajs/react";
 
 // =========================================================
 // مكوّن شاشة التحميل - Loading Screen
-// يستخدم شعار إنجاز سكور مع حركة نبض وحلقة دوارة
+// يستخدم شعار الموقع مع حركة نبض وحلقة دوارة
 // يظهر تلقائياً عند الانتقال بين الصفحات عبر Inertia
+// يدعم الوضع الفاتح والداكن بشكل تلقائي
 // =========================================================
 
 export default function LoadingScreen() {
     const [isLoading, setIsLoading] = useState(false);
+    const [isDark, setIsDark] = useState(false);
 
     useEffect(() => {
-        // الاستماع لأحداث Inertia عند بدء الانتقال وانتهائه
-        const startHandler = () => setIsLoading(true);
+        // ─── اكتشاف الوضع الحالي (فاتح / داكن) ───────────────────────
+        const checkDark = () => {
+            setIsDark(document.documentElement.classList.contains("dark"));
+        };
+
+        // اقرأ الوضع فور تحميل المكوّن
+        checkDark();
+
+        // راقب التغييرات الحية على الـ class لعنصر <html>
+        const observer = new MutationObserver(checkDark);
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ["class"],
+        });
+
+        // ─── أحداث Inertia للانتقال بين الصفحات ───────────────────────
+        const startHandler = () => {
+            checkDark(); // حدّث الوضع عند كل انتقال
+            setIsLoading(true);
+        };
         const finishHandler = () => setIsLoading(false);
 
-        // عند بدء التنقل بين الصفحات
         const removeStart = router.on("start", startHandler);
-        // عند انتهاء التنقل بنجاح أو فشل
         const removeFinish = router.on("finish", finishHandler);
 
         return () => {
+            observer.disconnect();
             removeStart();
             removeFinish();
         };
     }, []);
 
-    // إذا لم يكن هناك تحميل، لا نعرض شيئاً
     if (!isLoading) return null;
+
+    // ألوان الخلفية والنصوص والحلقة حسب الوضع
+    const bgColor = isDark
+        ? "linear-gradient(135deg, #0d1117 0%, #111827 100%)"
+        : "linear-gradient(135deg, #f0fdf4 0%, #f8fafc 100%)";
+
+    const spinnerColor = isDark ? "#10b981" : "#059669";       // emerald-500 / emerald-600
+    const spinnerDimColor = isDark
+        ? "rgba(16,185,129,0.25)"
+        : "rgba(5,150,105,0.2)";
+    const innerColor = isDark
+        ? "rgba(255,255,255,0.15)"
+        : "rgba(0,0,0,0.08)";
+    const textColor = isDark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.45)";
 
     return (
         <div
             className="fixed inset-0 z-[9999] flex items-center justify-center"
-            style={{
-                background: "linear-gradient(135deg, #0f1a14 0%, #000 100%)",
-            }}
+            style={{ background: bgColor, transition: "background 0.3s" }}
         >
             {/* الحاوية المركزية */}
             <div className="flex flex-col items-center gap-6">
@@ -44,11 +74,11 @@ export default function LoadingScreen() {
                     <div
                         className="w-32 h-32 rounded-full border-[5px] border-transparent"
                         style={{
-                            borderTopColor: "#eab308",
-                            borderRightColor: "rgba(234,179,8,0.3)",
+                            borderTopColor: spinnerColor,
+                            borderRightColor: spinnerDimColor,
                             borderBottomColor: "transparent",
-                            borderLeftColor: "rgba(234,179,8,0.15)",
-                            animation: "spin 1s linear infinite",
+                            borderLeftColor: spinnerDimColor,
+                            animation: "ls-spin 1s linear infinite",
                         }}
                     />
 
@@ -56,34 +86,39 @@ export default function LoadingScreen() {
                     <div
                         className="absolute w-24 h-24 rounded-full border-[5px] border-transparent"
                         style={{
-                            borderTopColor: "rgba(255,255,255,0.15)",
-                            borderBottomColor: "rgba(255,255,255,0.4)",
+                            borderTopColor: innerColor,
+                            borderBottomColor: innerColor,
                             borderRightColor: "transparent",
                             borderLeftColor: "transparent",
-                            animation: "spin 1.5s linear infinite reverse",
+                            animation: "ls-spin 1.5s linear infinite reverse",
                         }}
                     />
 
                     {/* شعار الشركة في المنتصف ينبض */}
                     <div
                         className="absolute w-16 h-16 flex items-center justify-center"
-                        style={{ animation: "logoPulse 1.8s ease-in-out infinite" }}
+                        style={{ animation: "ls-pulse 1.8s ease-in-out infinite" }}
                     >
                         <img
                             src="/logo.png"
-                            alt="إنجاز سكور"
+                            alt="واثق"
                             className="w-full h-full object-contain"
-                            style={{ filter: "brightness(0) invert(1)" }}
+                            style={{
+                                filter: isDark
+                                    ? "brightness(0) invert(1)"
+                                    : "none",
+                            }}
                         />
                     </div>
                 </div>
 
                 {/* نص "جاري التحميل..." */}
                 <p
-                    className="text-white/70 text-sm font-bold tracking-widest"
+                    className="text-sm font-bold tracking-widest"
                     style={{
+                        color: textColor,
                         fontFamily: "'Cairo', sans-serif",
-                        animation: "fadeInOut 1.8s ease-in-out infinite",
+                        animation: "ls-fade 1.8s ease-in-out infinite",
                     }}
                 >
                     جاري التحميل...
@@ -92,17 +127,17 @@ export default function LoadingScreen() {
 
             {/* أنيميشن CSS مضمّنة */}
             <style dangerouslySetInnerHTML={{ __html: `
-                @keyframes spin {
-                    0% { transform: rotate(0deg); }
+                @keyframes ls-spin {
+                    0%   { transform: rotate(0deg); }
                     100% { transform: rotate(360deg); }
                 }
-                @keyframes logoPulse {
+                @keyframes ls-pulse {
                     0%, 100% { opacity: 1; transform: scale(1); }
-                    50% { opacity: 0.6; transform: scale(0.88); }
+                    50%       { opacity: 0.6; transform: scale(0.88); }
                 }
-                @keyframes fadeInOut {
+                @keyframes ls-fade {
                     0%, 100% { opacity: 0.5; }
-                    50% { opacity: 1; }
+                    50%       { opacity: 1; }
                 }
             `}} />
         </div>
