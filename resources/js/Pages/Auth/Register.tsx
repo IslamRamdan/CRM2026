@@ -1,7 +1,26 @@
 import { Head, useForm, Link } from "@inertiajs/react";
-import { FormEventHandler } from "react";
+import { FormEventHandler, useState } from "react";
+import ThemeToggle from "@/Components/ThemeToggle";
+
+// =========================================================
+// صفحة إنشاء حساب الشركة - Register (متعددة الخطوات)
+// مستوحاة من التصميم المرفق (Multi-step form)
+// الشركة: إنجاز سكور للبرمجة
+// =========================================================
 
 export default function Register() {
+    // -------------------------------------------------------
+    // إدارة حالة الخطوات (1, 2, 3)
+    // -------------------------------------------------------
+    const [step, setStep] = useState(1);
+    
+    // حالة إظهار/إخفاء كلمات المرور
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+    // -------------------------------------------------------
+    // تهيئة نموذج Inertia
+    // -------------------------------------------------------
     const { data, setData, post, processing, errors } = useForm({
         company_name: "",
         city: "",
@@ -12,258 +31,293 @@ export default function Register() {
         password_confirmation: "",
     });
 
+    // الانتقال للخطوة التالية
+    const nextStep = () => {
+        if (step < 3) setStep(step + 1);
+    };
+
+    // الانتقال لخطوة محددة
+    const goToStep = (targetStep: number) => {
+        setStep(targetStep);
+    };
+
+    // -------------------------------------------------------
+    // دالة الإرسال النهائية
+    // -------------------------------------------------------
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        post(route("company.register"));
+        // إرسال البيانات فقط إذا كنا في الخطوة الأخيرة
+        if (step === 3) {
+            post(route("company.register"));
+        } else {
+            nextStep();
+        }
     };
+
+    // أيقونة العين المشتركة (لتجنب تكرار الكود)
+    const EyeIcon = ({ show }: { show: boolean }) => (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+            {show ? (
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
+            ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+            )}
+            {!show && <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />}
+        </svg>
+    );
 
     return (
         <>
-            <Head title="منصة CRM - إنشاء حساب شركة" />
+            <Head title="إنجاز سكور — إنشاء حساب" />
 
-            {/* الخلفية بالكامل بيضاء ناصعة والخطوط منسقة بالاتجاه العربي */}
             <div
-                className="min-h-screen flex bg-white text-zinc-900 font-sans"
+                className="min-h-screen flex flex-col items-center justify-center text-zinc-900 relative py-12 dark:bg-zinc-900"
                 dir="rtl"
+                style={{
+                    fontFamily: "'Cairo', sans-serif",
+                    background: "linear-gradient(135deg, #1f2923 0%, #111d17 100%)",
+                }}
             >
-                {/* RIGHT SIDE - FORM (النصف الأيمن - حقول البيانات) */}
-                <div className="w-full lg:w-1/2 flex items-center justify-center p-6 md:p-12 bg-white relative">
-                    <div className="w-full max-w-xl bg-white p-8 rounded-2xl border border-zinc-200/80 shadow-xl shadow-zinc-100 relative z-10">
-                        {/* شعار الهوية بالأخضر السعودي الصافي */}
-                        <div className="w-12 h-12 rounded-xl bg-[#006C35] flex items-center justify-center text-white font-bold text-xl mb-6 shadow-md shadow-emerald-800/10">
-                            س
-                        </div>
+                {/* زر الوضع الليلي في الزاوية العلوية اليسرى */}
+                <div className="absolute top-6 left-6 z-50">
+                    <ThemeToggle className="bg-white/10 text-white hover:bg-white/20 dark:bg-black/30 dark:hover:bg-black/50 backdrop-blur-md" />
+                </div>
 
-                        <h1 className="text-2xl font-black text-zinc-900 tracking-tight">
-                            إنشاء حساب منشأة جديد
-                        </h1>
+                <div className="mb-6 text-center animate-fade-in-up flex flex-col items-center">
+                    <Link href="/">
+                        <img
+                            src="/logo.png"
+                            alt="إنجاز سكور للبرمجة"
+                            className="h-14 w-auto mx-auto mb-3"
+                            style={{ filter: "brightness(0) invert(1)" }}
+                        />
+                    </Link>
+                    <h1 className="text-white font-bold text-xl">إنجاز سكور</h1>
+                </div>
 
-                        <p className="text-sm text-zinc-500 mt-2 mb-8 leading-relaxed">
-                            سجل منشأتك الآن وابدأ أتمتة المعاملات وتتبع الكفلاء
-                            والمندوبين.
+                <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl p-8 sm:p-10 relative z-10 mx-4 dark:bg-zinc-800 dark:text-white">
+                    
+                    {/* Step Indicator */}
+                    <div className="flex items-center justify-between mb-8 relative">
+                        <div className="absolute top-1/2 left-0 right-0 h-[2px] bg-zinc-200 dark:bg-zinc-700 -z-10 transform -translate-y-1/2"></div>
+                        <div 
+                            className="absolute top-1/2 right-0 h-[2px] -z-10 transform -translate-y-1/2 transition-all duration-300"
+                            style={{ 
+                                width: step === 1 ? "0%" : step === 2 ? "50%" : "100%",
+                                backgroundColor: "#2DAA7E"
+                            }}
+                        ></div>
+
+                        {[1, 2, 3].map((num) => (
+                            <button 
+                                key={num}
+                                type="button"
+                                onClick={() => goToStep(num)}
+                                className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
+                                    step >= num 
+                                        ? "text-white" 
+                                        : "bg-white border-2 border-zinc-200 text-zinc-500 dark:bg-zinc-800 dark:border-zinc-700"
+                                }`}
+                                style={step >= num ? { background: "linear-gradient(135deg, #2DAA7E 0%, #1D6B55 100%)" } : {}}
+                            >
+                                {num}
+                            </button>
+                        ))}
+                    </div>
+
+                    {/* Step Title */}
+                    <div className="text-center mb-8">
+                        <p className="text-xs text-zinc-400 font-bold mb-2">
+                            الخطوة {step} من 3
                         </p>
+                        <h2 className="text-2xl font-black text-zinc-800 dark:text-zinc-100 mb-2">
+                            {step === 1 && "بيانات المنشأة"}
+                            {step === 2 && "بيانات المسؤول"}
+                            {step === 3 && "إعداد كلمة المرور"}
+                        </h2>
+                        <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                            {step === 1 && "أدخل اسم الشركة والمدينة"}
+                            {step === 2 && "من سيدير حساب الوكالة؟"}
+                            {step === 3 && "لتأمين حساب الوكالة الخاص بك"}
+                        </p>
+                    </div>
 
-                        <form onSubmit={submit} className="space-y-5">
-                            {/* COMPANY NAME */}
-                            <div className="space-y-1">
-                                <label className="text-xs font-bold text-zinc-700">
-                                    اسم الشركة / المؤسسة
-                                </label>
-                                <input
-                                    type="text"
-                                    placeholder="شركة حلول الأعمال المحدودة"
-                                    className="w-full bg-zinc-50 border border-zinc-200 rounded-xl p-3 text-sm focus:outline-none focus:ring-4 focus:ring-[#006C35]/10 focus:border-[#006C35] transition-all text-right"
-                                    value={data.company_name}
-                                    onChange={(e) =>
-                                        setData("company_name", e.target.value)
-                                    }
-                                />
-                                {errors.company_name && (
-                                    <p className="text-red-500 text-xs mt-1 font-medium">
-                                        {errors.company_name}
-                                    </p>
-                                )}
-                            </div>
-
-                            {/* TWO COLUMNS FOR CITY & OWNER NAME */}
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div className="space-y-1">
-                                    <label className="text-xs font-bold text-zinc-700">
+                    <form onSubmit={submit} className="space-y-5">
+                        {step === 1 && (
+                            <div className="space-y-4 animate-fade-in-up">
+                                <div>
+                                    <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5">
+                                        اسم الشركة / المؤسسة <span className="text-red-500">*</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        placeholder="شركة إنجاز سكور"
+                                        className="w-full bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-xl p-3.5 text-sm focus:ring-2 focus:ring-[#2DAA7E] focus:border-[#2DAA7E] dark:focus:ring-[#5CC98B] dark:focus:border-[#5CC98B] transition-all outline-none"
+                                        value={data.company_name}
+                                        onChange={(e) => setData("company_name", e.target.value)}
+                                        required
+                                    />
+                                    {errors.company_name && <p className="text-red-500 text-xs mt-1">{errors.company_name}</p>}
+                                </div>
+                                <div>
+                                    <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5">
                                         المدينة
                                     </label>
                                     <input
                                         type="text"
                                         placeholder="الرياض"
-                                        className="w-full bg-zinc-50 border border-zinc-200 rounded-xl p-3 text-sm focus:outline-none focus:ring-4 focus:ring-[#006C35]/10 focus:border-[#006C35] transition-all text-right"
+                                        className="w-full bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-xl p-3.5 text-sm focus:ring-2 focus:ring-[#2DAA7E] focus:border-[#2DAA7E] dark:focus:ring-[#5CC98B] dark:focus:border-[#5CC98B] transition-all outline-none"
                                         value={data.city}
-                                        onChange={(e) =>
-                                            setData("city", e.target.value)
-                                        }
+                                        onChange={(e) => setData("city", e.target.value)}
                                     />
-                                    {errors.city && (
-                                        <p className="text-red-500 text-xs mt-1 font-medium">
-                                            {errors.city}
-                                        </p>
-                                    )}
                                 </div>
+                            </div>
+                        )}
 
-                                <div className="space-y-1">
-                                    <label className="text-xs font-bold text-zinc-700">
-                                        اسم المسؤول المعتمد
+                        {step === 2 && (
+                            <div className="space-y-4 animate-fade-in-up">
+                                <div>
+                                    <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5">
+                                        اسم المسؤول <span className="text-red-500">*</span>
                                     </label>
                                     <input
                                         type="text"
                                         placeholder="عبدالله محمد"
-                                        className="w-full bg-zinc-50 border border-zinc-200 rounded-xl p-3 text-sm focus:outline-none focus:ring-4 focus:ring-[#006C35]/10 focus:border-[#006C35] transition-all text-right"
+                                        className="w-full bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-xl p-3.5 text-sm focus:ring-2 focus:ring-[#2DAA7E] focus:border-[#2DAA7E] dark:focus:ring-[#5CC98B] transition-all outline-none"
                                         value={data.name}
-                                        onChange={(e) =>
-                                            setData("name", e.target.value)
-                                        }
+                                        onChange={(e) => setData("name", e.target.value)}
+                                        required
                                     />
-                                    {errors.name && (
-                                        <p className="text-red-500 text-xs mt-1 font-medium">
-                                            {errors.name}
-                                        </p>
-                                    )}
+                                    {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
                                 </div>
-                            </div>
-
-                            {/* EMAIL & PHONE IN TWO COLUMNS */}
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div className="space-y-1">
-                                    <label className="text-xs font-bold text-zinc-700">
+                                <div>
+                                    <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5">
+                                        البريد الإلكتروني <span className="text-red-500">*</span>
+                                    </label>
+                                    <input
+                                        type="email"
+                                        dir="ltr"
+                                        placeholder="info@company.com"
+                                        className="w-full bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-xl p-3.5 text-sm focus:ring-2 focus:ring-[#2DAA7E] focus:border-[#2DAA7E] dark:focus:ring-[#5CC98B] transition-all outline-none text-left"
+                                        value={data.email}
+                                        onChange={(e) => setData("email", e.target.value)}
+                                        required
+                                    />
+                                    {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+                                </div>
+                                <div>
+                                    <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5">
                                         رقم الجوال
                                     </label>
                                     <input
                                         type="tel"
+                                        dir="ltr"
                                         placeholder="05xxxxxxxx"
-                                        className="w-full bg-zinc-50 border border-zinc-200 rounded-xl p-3 text-sm text-left dir-ltr focus:outline-none focus:ring-4 focus:ring-[#006C35]/10 focus:border-[#006C35] transition-all"
+                                        className="w-full bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-xl p-3.5 text-sm focus:ring-2 focus:ring-[#2DAA7E] focus:border-[#2DAA7E] dark:focus:ring-[#5CC98B] transition-all outline-none text-left"
                                         value={data.phone}
-                                        onChange={(e) =>
-                                            setData("phone", e.target.value)
-                                        }
+                                        onChange={(e) => setData("phone", e.target.value)}
                                     />
-                                    {errors.phone && (
-                                        <p className="text-red-500 text-xs mt-1 font-medium">
-                                            {errors.phone}
-                                        </p>
-                                    )}
                                 </div>
+                            </div>
+                        )}
 
-                                <div className="space-y-1">
-                                    <label className="text-xs font-bold text-zinc-700">
-                                        البريد الإلكتروني
+                        {step === 3 && (
+                            <div className="space-y-4 animate-fade-in-up">
+                                <div className="relative">
+                                    <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 text-right w-full">
+                                        كلمة المرور
                                     </label>
                                     <input
-                                        type="email"
-                                        placeholder="info@company.sa"
-                                        className="w-full bg-zinc-50 border border-zinc-200 rounded-xl p-3 text-sm text-left dir-ltr focus:outline-none focus:ring-4 focus:ring-[#006C35]/10 focus:border-[#006C35] transition-all"
-                                        value={data.email}
-                                        onChange={(e) =>
-                                            setData("email", e.target.value)
-                                        }
+                                        type={showPassword ? "text" : "password"}
+                                        dir="ltr"
+                                        placeholder="••••••••"
+                                        className="w-full bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-xl p-3.5 text-sm focus:ring-2 focus:ring-[#2DAA7E] focus:border-[#2DAA7E] dark:focus:ring-[#5CC98B] transition-all outline-none text-left pr-12"
+                                        value={data.password}
+                                        onChange={(e) => setData("password", e.target.value)}
+                                        required
                                     />
-                                    {errors.email && (
-                                        <p className="text-red-500 text-xs mt-1 font-medium">
-                                            {errors.email}
-                                        </p>
-                                    )}
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        className="absolute right-3 top-[34px] text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200"
+                                    >
+                                        <EyeIcon show={showPassword} />
+                                    </button>
+                                    {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
+                                </div>
+                                <div className="relative">
+                                    <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 text-right w-full">
+                                        تأكيد كلمة المرور
+                                    </label>
+                                    <input
+                                        type={showConfirmPassword ? "text" : "password"}
+                                        dir="ltr"
+                                        placeholder="••••••••"
+                                        className="w-full bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-xl p-3.5 text-sm focus:ring-2 focus:ring-[#2DAA7E] focus:border-[#2DAA7E] dark:focus:ring-[#5CC98B] transition-all outline-none text-left pr-12"
+                                        value={data.password_confirmation}
+                                        onChange={(e) => setData("password_confirmation", e.target.value)}
+                                        required
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                        className="absolute right-3 top-[34px] text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200"
+                                    >
+                                        <EyeIcon show={showConfirmPassword} />
+                                    </button>
                                 </div>
                             </div>
+                        )}
 
-                            {/* PASSWORD */}
-                            <div className="space-y-1">
-                                <label className="text-xs font-bold text-zinc-700">
-                                    كلمة المرور
-                                </label>
-                                <input
-                                    type="password"
-                                    placeholder="••••••••"
-                                    className="w-full bg-zinc-50 border border-zinc-200 rounded-xl p-3 text-sm text-left dir-ltr focus:outline-none focus:ring-4 focus:ring-[#006C35]/10 focus:border-[#006C35] transition-all"
-                                    value={data.password}
-                                    onChange={(e) =>
-                                        setData("password", e.target.value)
-                                    }
-                                />
-                                {errors.password && (
-                                    <p className="text-red-500 text-xs mt-1 font-medium">
-                                        {errors.password}
-                                    </p>
-                                )}
-                            </div>
-
-                            {/* CONFIRM PASSWORD */}
-                            <div className="space-y-1">
-                                <label className="text-xs font-bold text-zinc-700">
-                                    تأكيد كلمة المرور
-                                </label>
-                                <input
-                                    type="password"
-                                    placeholder="••••••••"
-                                    className="w-full bg-zinc-50 border border-zinc-200 rounded-xl p-3 text-sm text-left dir-ltr focus:outline-none focus:ring-4 focus:ring-[#006C35]/10 focus:border-[#006C35] transition-all"
-                                    value={data.password_confirmation}
-                                    onChange={(e) =>
-                                        setData(
-                                            "password_confirmation",
-                                            e.target.value,
-                                        )
-                                    }
-                                />
-                            </div>
-
-                            {/* SUBMIT BUTTON */}
+                        <div className="pt-4">
                             <button
+                                type="submit"
                                 disabled={processing}
-                                className="w-full mt-2 bg-[#006C35] hover:bg-[#005428] text-white py-3.5 rounded-xl font-bold transition-all transform hover:-translate-y-0.5 shadow-lg shadow-emerald-800/10 disabled:opacity-50 disabled:pointer-events-none text-base"
+                                className="w-full text-white py-3.5 rounded-xl font-bold transition-all disabled:opacity-50 text-sm shadow-lg"
+                                style={{ background: "linear-gradient(135deg, #2DAA7E 0%, #1D6B55 100%)" }}
                             >
-                                {processing
-                                    ? "جاري إنشاء الحساب..."
-                                    : "تسجيل واعتماد المنشأة"}
+                                {step < 3 ? "التالي" : (processing ? "جاري الإنشاء..." : "إنشاء حساب")}
                             </button>
+                        </div>
+                    </form>
 
-                            <p className="text-center text-xs text-zinc-500 mt-4">
-                                لديك حساب بالفعل؟{" "}
-                                <Link
-                                    href={route("login")}
-                                    className="text-[#006C35] font-bold hover:underline"
-                                >
-                                    تسجيل الدخول
-                                </Link>
-                            </p>
-                        </form>
+                    <div className="mt-8 text-center text-sm">
+                        <span className="text-zinc-500 dark:text-zinc-400">لديك حساب بالفعل؟ </span>
+                        <Link
+                            href={route("login")}
+                            className="font-bold hover:underline"
+                            style={{ color: "#2DAA7E" }}
+                        >
+                            تسجيل الدخول
+                        </Link>
                     </div>
                 </div>
 
-                {/* LEFT SIDE - HERO WALLPAPER (النصف الأيسر - واجهة العرض بالأخضر السعودي الصافي) */}
-                <div className="hidden lg:flex w-1/2 bg-[#006C35] text-white items-center justify-center p-12 relative overflow-hidden">
-                    {/* نمط النقاط الهندسية الشفافة الناعمة لتزيين الخلفية بلمسة رسمية */}
-                    <div className="absolute inset-0 opacity-5 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px]" />
-
-                    <div className="text-center max-w-lg relative z-10">
-                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-white text-xs font-medium mb-8">
-                            🇸🇦 منصة موحدة معتمدة لخدمات الشركات
-                        </div>
-
-                        <h2 className="text-4xl font-black mb-6 leading-tight tracking-wide text-white">
-                            نظام إدارة الوكالات ومعاملات الشركات
-                        </h2>
-
-                        <p className="text-white/90 text-lg leading-relaxed font-light">
-                            منصة ذكية موحدة تتيح لك التحكم المطلق بإدارة شؤون
-                            الموظفين، تتبع مسارات التأشيرات، وتنظيم العلاقات
-                            القانونية والتجارية مع الكفلاء والمندوبين.
-                        </p>
-
-                        {/* إحصائيات بصرية سريعة متناسقة بالأبيض الشفاف والأخضر */}
-                        <div className="mt-12 pt-8 border-t border-white/10 grid grid-cols-3 gap-4 text-center">
-                            <div>
-                                <h4 className="text-2xl font-black text-white">
-                                    100%
-                                </h4>
-                                <p className="text-xs text-white/70 mt-1">
-                                    أتمتة رقمية
-                                </p>
-                            </div>
-                            <div>
-                                <h4 className="text-2xl font-black text-white">
-                                    آمن
-                                </h4>
-                                <p className="text-xs text-white/70 mt-1">
-                                    حماية البيانات
-                                </p>
-                            </div>
-                            <div>
-                                <h4 className="text-2xl font-black text-white">
-                                    مرن
-                                </h4>
-                                <p className="text-xs text-white/70 mt-1">
-                                    توافق الأنظمة
-                                </p>
-                            </div>
-                        </div>
+                <div className="mt-8 flex items-center justify-center gap-6 text-xs text-white/70">
+                    <div className="flex items-center gap-1.5">
+                        <span className="text-green-400">✓</span>
+                        14 يوم تجربة مجانية
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                        <span className="text-green-400">✓</span>
+                        بدون بطاقة ائتمان
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                        <span className="text-green-400">✓</span>
+                        إلغاء في أي وقت
                     </div>
                 </div>
             </div>
+
+            <style dangerouslySetInnerHTML={{__html: `
+                @keyframes fadeInUp {
+                    from { opacity: 0; transform: translateY(10px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+                .animate-fade-in-up {
+                    animation: fadeInUp 0.3s ease-out forwards;
+                }
+            `}} />
         </>
     );
 }
