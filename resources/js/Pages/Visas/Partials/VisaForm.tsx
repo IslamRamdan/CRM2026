@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useForm } from "@inertiajs/react";
-
 import Modal from "@/Components/Modal";
 
 interface Sponsor {
@@ -31,18 +30,16 @@ export default function VisaForm({
     visa,
     sponsors = [],
 }: Props) {
-    // إعداد فورم الـ Inertia المربوط مع فاليـديشن لارافل تلقائياً
     const { data, setData, post, put, processing, errors, reset, clearErrors } =
         useForm({
             name: "",
             type: "",
             issue_number: "",
-            consulate: "", // سيتم تخزين خيار القنصلية المحدد هنا
+            consulate: "",
             sponsor_id: "",
             issue_date_hijri: "",
         });
 
-    // تعبئة البيانات في حال وضع "التعديل" وتصفيرها في وضع "الإضافة"
     useEffect(() => {
         if (visa) {
             setData({
@@ -187,7 +184,7 @@ export default function VisaForm({
                         </div>
                     </div>
 
-                    {/* رقم الصادر والقنصلية (سليكت الجديدة) */}
+                    {/* رقم الصادر والقنصلية */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label className="block text-xs font-bold text-zinc-500 mb-1.5 mr-1">
@@ -254,7 +251,7 @@ export default function VisaForm({
                         )}
                     </div>
 
-                    {/* أزرار الإجراءات والـ Actions */}
+                    {/* أزرار الإجراءات */}
                     <div className="pt-4 flex gap-3 border-t border-zinc-100 mt-6">
                         <button
                             type="submit"

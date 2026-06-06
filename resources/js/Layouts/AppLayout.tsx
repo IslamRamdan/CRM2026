@@ -8,7 +8,10 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
     // تطبيق كلاس الدارك مود بناء على localStorage للوحة التحكم أيضاً
     useEffect(() => {
-        const isDark = localStorage.getItem("theme") === "dark" || (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        const isDark =
+            localStorage.getItem("theme") === "dark" ||
+            (!("theme" in localStorage) &&
+                window.matchMedia("(prefers-color-scheme: dark)").matches);
         if (isDark) {
             document.documentElement.classList.add("dark");
         } else {
@@ -28,12 +31,10 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
             {/* تمرير الحالات للسايد بار */}
             {/* الـ Sidebar يستقبل isCollapsed فقط - setIsCollapsed تُدار داخلياً */}
-            <Sidebar
-                isCollapsed={isCollapsed}
-            />
+            <Sidebar isCollapsed={isCollapsed} />
 
             {/* المحتوى الرئيسي يتمدد وينكمش بسلاسة بفضل الترانزيشن */}
-            <main className="flex-1 p-6 transition-all duration-350 ease-in-out overflow-y-auto">
+            <main className="flex-1 py-6 transition-all duration-350 ease-in-out overflow-y-auto">
                 {children}
             </main>
         </div>
