@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\CompanyRegisterController;
 use App\Http\Controllers\Company\UserController;
+use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Delegate\DelegateController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Sponsor\SponsorController;
@@ -67,5 +68,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/visas', [VisaController::class, 'store'])->name('visas.store');
     Route::put('/visas/{visa}', [VisaController::class, 'update'])->name('visas.update');
     Route::delete('/visas/{visa}', [VisaController::class, 'destroy'])->name('visas.destroy');
+});
+
+Route::middleware(['auth'])->group(function () {
+
+    // عرض كل العملاء
+    Route::get('/customers', [CustomerController::class, 'index'])
+        ->name('customers.index');
+
+    // صفحة إنشاء عميل
+    Route::get('/customers/create', [CustomerController::class, 'create'])
+        ->name('customers.create');
+
+    // حفظ عميل
+    Route::post('/customers', [CustomerController::class, 'store'])
+        ->name('customers.store');
 });
 require __DIR__ . '/auth.php';

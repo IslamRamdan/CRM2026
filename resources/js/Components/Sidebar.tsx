@@ -42,6 +42,7 @@ export default function Sidebar({
         { href: "/delegates", label: "المناديب", icon: "✅", hasDot: true },
         { href: "/sponsors", label: "الكفلاء", icon: "🕌", hasDot: false },
         { href: "/visas", label: "التأشيرات", icon: "👥", hasDot: true },
+        { href: "/customers", label: "العملاء", icon: "👥", hasDot: true },
     ];
 
     return (

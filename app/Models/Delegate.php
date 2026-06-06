@@ -16,4 +16,17 @@ class Delegate extends Model
     {
         return $this->belongsTo(Company::class);
     }
+    public function customers()
+    {
+        return $this->belongsToMany(
+            Customer::class,
+            'customer_delegate'
+        )
+            ->withPivot([
+                'assigned_at',
+                'ended_at',
+                'changed_by'
+            ])
+            ->withTimestamps();
+    }
 }
