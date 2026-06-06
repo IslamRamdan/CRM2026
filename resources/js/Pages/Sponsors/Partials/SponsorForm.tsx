@@ -45,9 +45,12 @@ export default function SponsorForm({ isOpen, onClose, sponsor }: Props) {
         e.preventDefault();
 
         if (sponsor) {
-            // استدعاء مسار التحديث PUT
+            // استدعاء مسار التحديث PUT مع تنظيف الفورم عند النجاح
             put(route("sponsors.update", sponsor.id), {
-                onSuccess: () => onClose(),
+                onSuccess: () => {
+                    reset();
+                    onClose();
+                },
             });
         } else {
             // استدعاء مسار الحفظ الجديد POST
@@ -69,6 +72,7 @@ export default function SponsorForm({ isOpen, onClose, sponsor }: Props) {
                         {sponsor ? "تعديل بيانات الكفيل" : "إضافة كفيل جديد"}
                     </h3>
                     <button
+                        type="button"
                         onClick={onClose}
                         className="text-zinc-400 hover:text-zinc-600 dark:text-gray-400 dark:hover:text-gray-200 p-1.5 hover:bg-zinc-100 dark:hover:bg-gray-800 rounded-lg transition-all cursor-pointer"
                     >
@@ -179,7 +183,7 @@ export default function SponsorForm({ isOpen, onClose, sponsor }: Props) {
                         <button
                             type="submit"
                             disabled={processing}
-                            className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition-all shadow-sm shadow-blue-100 dark:shadow-none disabled:opacity-50 cursor-pointer text-center text-sm"
+                            className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition-all shadow-sm shadow-emerald-100 dark:shadow-none disabled:opacity-50 cursor-pointer text-center text-sm"
                         >
                             {processing
                                 ? "جاري الحفظ والرفع.."
