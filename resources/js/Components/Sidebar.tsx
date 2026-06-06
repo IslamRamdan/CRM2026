@@ -46,7 +46,7 @@ export default function Sidebar({
 
     return (
         <aside
-            className={`min-h-screen bg-white dark:bg-zinc-900 border-l border-zinc-100 dark:border-zinc-800 shadow-sm flex flex-col justify-between sticky top-0 font-sans transition-all duration-300 group/sidebar ${
+            className={`min-h-screen bg-white dark:bg-zinc-900 border-l border-zinc-100 dark:border-zinc-800 shadow-sm flex flex-col justify-between sticky top-0 font-sans transition-all duration-300 relative group/sidebar ${
                 collapsed ? "w-[80px]" : "w-[280px]"
             }`}
             dir="rtl"

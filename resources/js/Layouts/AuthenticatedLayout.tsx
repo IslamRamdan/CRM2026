@@ -16,10 +16,7 @@ export default function Authenticated({
 
     return (
         // الاتجاه الافتراضي يدعم العربية، والخلفية رمادي ناعم فاخر جداً
-        <div
-            className="min-h-screen bg-zinc-50 text-zinc-900 font-sans"
-            dir="rtl"
-        >
+        <div className="min-h-screen bg-zinc-50 text-zinc-900" dir="rtl">
             <nav className="border-b border-zinc-200 bg-white sticky top-0 z-50 shadow-sm">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="flex h-16 justify-between items-center">

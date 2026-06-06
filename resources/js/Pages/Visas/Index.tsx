@@ -86,7 +86,7 @@ export default function Index({ visas = [], sponsors = [] }: Props) {
 
                     <button
                         onClick={openCreateModal}
-                        className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-sm transition-all shadow-sm shadow-emerald-100 cursor-pointer"
+                        className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-sm transition-all shadow-xs hover:shadow-md shadow-emerald-100/50 dark:shadow-none cursor-pointer"
                     >
                         <svg
                             className="w-5 h-5"
