@@ -59,7 +59,7 @@ export default function Sidebar({
                     e.preventDefault();
                     setCollapsed(!collapsed);
                 }}
-                className={`absolute top-6 -left-3.5 z-50 w-7 h-7 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-full flex items-center justify-center text-zinc-500 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-emerald-400 shadow-xs cursor-pointer transition-transform duration-300 ${
+                className={`absolute top-6 -left-3.5 z-50 w-7 h-7 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-full flex items-center justify-center text-zinc-500 dark:text-zinc-400 hover:text-green-600 dark:hover:text-green-400 shadow-xs cursor-pointer transition-transform duration-300 ${
                     collapsed ? "rotate-180" : ""
                 }`}
                 title={collapsed ? "توسيع القائمة" : "طوي القائمة"}
@@ -84,7 +84,7 @@ export default function Sidebar({
                 {/* لوجو المنصة */}
                 <div className="p-4 flex justify-center border-b border-zinc-50 dark:border-zinc-800 h-[85px] items-center">
                     {collapsed ? (
-                        <span className="text-xl font-black text-emerald-600 dark:text-emerald-400 tracking-wider animate-fade-in">
+                        <span className="text-xl font-black text-green-600 dark:text-green-400 tracking-wider animate-fade-in">
                             W
                         </span>
                     ) : (
@@ -118,7 +118,7 @@ export default function Sidebar({
                                 d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.02 6.02 0 00-4.902-5.903m0 0V4a1 1 0 10-2 0v1.097A6.02 6.02 0 006 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v1m6 0H9"
                             />
                         </svg>
-                        <span className="absolute top-1.5 left-1.5 w-2 h-2 bg-emerald-600 rounded-full" />
+                        <span className="absolute top-1.5 left-1.5 w-2 h-2 bg-green-600 rounded-full" />
                     </button>
 
                     {!collapsed && (
@@ -149,7 +149,7 @@ export default function Sidebar({
                                                 : "justify-between px-4 py-3"
                                         } ${
                                             active
-                                                ? "bg-emerald-50 border border-emerald-200 shadow-sm shadow-emerald-100 text-emerald-700 dark:bg-emerald-950/40 dark:border-transparent dark:shadow-none dark:text-emerald-400"
+                                                ? "bg-green-50 border border-green-200 shadow-sm shadow-green-100 text-green-700 dark:bg-green-950/40 dark:border-transparent dark:shadow-none dark:text-green-400"
                                                 : "border border-transparent text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50/80 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100"
                                         }`}
                                         title={collapsed ? item.label : ""}
@@ -169,7 +169,7 @@ export default function Sidebar({
                                         {/* نقطة الإشعار النشطة (أخضر زمردي مائل للنبض) */}
                                         {item.hasDot && active && (
                                             <span
-                                                className={`rounded-full bg-emerald-600 animate-pulse shrink-0 ${
+                                                className={`rounded-full bg-green-600 animate-pulse shrink-0 ${
                                                     collapsed
                                                         ? "absolute top-2 right-2 w-1.5 h-1.5"
                                                         : "w-1.5 h-1.5"
@@ -203,7 +203,7 @@ export default function Sidebar({
                         </div>
                     )}
 
-                    <div className="w-9 h-9 rounded-full bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-100 dark:border-emerald-900 text-emerald-700 dark:text-emerald-400 flex items-center justify-center font-black text-sm uppercase shadow-xs shrink-0">
+                    <div className="w-9 h-9 rounded-full bg-green-50 dark:bg-green-950/50 border border-green-100 dark:border-green-900 text-green-700 dark:text-green-400 flex items-center justify-center font-black text-sm uppercase shadow-xs shrink-0">
                         {user.email.charAt(0)}
                     </div>
                 </div>

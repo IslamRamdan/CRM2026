@@ -102,8 +102,8 @@ export default function Dashboard() {
                     </div>
 
                     {/* ويدجت التاريخ الفخم */}
-                    <div className="flex items-center gap-2 bg-emerald-50/40 dark:bg-emerald-950/20 border border-emerald-100/80 dark:border-emerald-900/40 px-4 py-2 rounded-xl text-emerald-800 dark:text-emerald-400 text-xs font-bold shadow-2xs">
-                        <Calendar className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                    <div className="flex items-center gap-2 bg-green-50/40 dark:bg-green-950/20 border border-green-100/80 dark:border-green-900/40 px-4 py-2 rounded-xl text-green-800 dark:text-green-400 text-xs font-bold shadow-xs hover:shadow-md hover:bg-green-50 dark:hover:bg-green-900/30 transition-all duration-300 cursor-default">
+                        <Calendar className="w-4 h-4 text-green-600 dark:text-green-400" />
                         <span>التقرير اللحظي الرقمي للشركة</span>
                     </div>
                 </div>
@@ -115,7 +115,7 @@ export default function Dashboard() {
                         return (
                             <div
                                 key={idx}
-                                className="bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 rounded-2xl p-5 shadow-2xs hover:border-emerald-200 dark:hover:border-emerald-800/60 transition-all duration-200 group relative overflow-hidden"
+                                className="bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 rounded-2xl p-5 shadow-sm hover:shadow-lg hover:shadow-green-900/5 hover:-translate-y-1 hover:border-green-200 dark:hover:border-green-800/60 transition-all duration-300 ease-out group relative overflow-hidden"
                             >
                                 <div className="flex items-start justify-between">
                                     <div className="space-y-2">
@@ -126,7 +126,7 @@ export default function Dashboard() {
                                             {stat.value}
                                         </span>
                                     </div>
-                                    <div className="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 group-hover:bg-emerald-50 dark:group-hover:bg-emerald-950/40 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                                    <div className="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 group-hover:bg-green-50 dark:group-hover:bg-green-950/40 group-hover:text-green-600 dark:group-hover:text-green-400 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 ease-out">
                                         <Icon className="w-5 h-5 stroke-[2.5]" />
                                     </div>
                                 </div>
@@ -135,7 +135,7 @@ export default function Dashboard() {
                                     <span
                                         className={`flex items-center font-bold px-1.5 py-0.5 rounded-md ${
                                             stat.isPositive
-                                                ? "bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-400"
+                                                ? "bg-green-50 dark:bg-green-950/50 text-green-700 dark:text-green-400"
                                                 : "bg-red-50 dark:bg-red-950/50 text-red-600 dark:text-red-400"
                                         }`}
                                     >
@@ -162,7 +162,7 @@ export default function Dashboard() {
                         <div className="flex items-center justify-between border-b border-zinc-50 dark:border-zinc-800 pb-4 mb-6">
                             <div>
                                 <h3 className="text-sm font-black text-zinc-800 dark:text-zinc-200 flex items-center gap-2">
-                                    <TrendingUp className="w-4 h-4 text-emerald-600" />
+                                    <TrendingUp className="w-4 h-4 text-green-600" />
                                     مخطط إصدار التأشيرات الدوري
                                 </h3>
                                 <p className="text-[11px] text-zinc-400 dark:text-zinc-500 mt-0.5 font-medium">
@@ -183,7 +183,7 @@ export default function Dashboard() {
                                     className="flex-1 flex flex-col items-center gap-2 h-full justify-end group/bar"
                                 >
                                     {/* رقم القيمة يظهر عند التحويم أو ثابت بشكل خفيف */}
-                                    <span className="text-[10px] font-black text-emerald-700 dark:text-emerald-400 opacity-0 group-hover/bar:opacity-100 transition-opacity bg-emerald-50 dark:bg-emerald-950/80 px-1.5 py-0.5 rounded-md mb-1">
+                                    <span className="text-[10px] font-black text-green-700 dark:text-green-400 opacity-0 group-hover/bar:opacity-100 transition-opacity bg-green-50 dark:bg-green-950/80 px-1.5 py-0.5 rounded-md mb-1">
                                         {data.label}
                                     </span>
                                     {/* العمود الملون بالأخضر السعودي */}
@@ -191,7 +191,7 @@ export default function Dashboard() {
                                         style={{
                                             height: `${(data.value / 120) * 100}%`,
                                         }}
-                                        className="w-full bg-zinc-100 dark:bg-zinc-800 group-hover/bar:bg-emerald-600 dark:group-hover/bar:bg-emerald-500 rounded-t-lg transition-all duration-300 relative overflow-hidden min-h-[5px]"
+                                        className="w-full bg-zinc-100 dark:bg-zinc-800 group-hover/bar:bg-green-600 dark:group-hover/bar:bg-green-500 rounded-t-lg transition-all duration-300 relative overflow-hidden min-h-[5px]"
                                     >
                                         <div className="absolute inset-0 bg-linear-to-t from-black/5 to-transparent" />
                                     </div>
@@ -208,7 +208,7 @@ export default function Dashboard() {
                         <div>
                             <div className="flex items-center justify-between border-b border-zinc-50 dark:border-zinc-800 pb-4 mb-4">
                                 <h3 className="text-sm font-black text-zinc-800 dark:text-zinc-200 flex items-center gap-2">
-                                    <Clock className="w-4 h-4 text-amber-500" />
+                                    <Clock className="w-4 h-4 text-orange-500" />
                                     آخر حركات التأشيرات
                                 </h3>
                             </div>
@@ -217,7 +217,7 @@ export default function Dashboard() {
                                 {recentActivities.map((act) => (
                                     <div
                                         key={act.id}
-                                        className="flex items-start justify-between gap-3 p-2.5 hover:bg-zinc-50/60 dark:hover:bg-zinc-800/40 rounded-xl transition-all border border-transparent hover:border-zinc-100 dark:hover:border-zinc-800"
+                                        className="flex items-start justify-between gap-3 p-3 hover:bg-white dark:hover:bg-zinc-800/60 rounded-xl transition-all duration-300 ease-out border border-transparent hover:border-green-100 dark:hover:border-green-900/30 hover:shadow-sm cursor-default group/act"
                                     >
                                         <div className="space-y-1 min-w-0">
                                             <p className="text-xs font-bold text-zinc-800 dark:text-zinc-200 truncate">
@@ -239,8 +239,8 @@ export default function Dashboard() {
                                         <span
                                             className={`text-[10px] font-bold px-2 py-0.5 rounded-lg shrink-0 ${
                                                 act.status === "مكتمل"
-                                                    ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400"
-                                                    : "bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-400"
+                                                    ? "bg-green-50 dark:bg-green-950/60 text-green-700 dark:text-green-400"
+                                                    : "bg-orange-50 dark:bg-orange-950/60 text-orange-700 dark:text-orange-400"
                                             }`}
                                         >
                                             {act.status}

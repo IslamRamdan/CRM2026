@@ -25,7 +25,7 @@ interface Props {
     delegates: Delegate[];
 }
 
-// ─── مكوّن حقل الرفع مع معاينة الصورة ───────────────────────────────────────
+// ─── مكوّن حقل الرفع مع معاينة الصورة 
 function ImageUploadField({
     label,
     field,
